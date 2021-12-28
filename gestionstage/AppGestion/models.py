@@ -32,7 +32,7 @@ class TypeStage (models.Model):
 
 class Stage (models.Model):
     NomStage = models.CharField(max_length=40)
-    Sujet = models.CharField(max_length=60)
+    Sujet = models.CharField(max_length=60,unique=True)
     TypeStage= models.ForeignKey("TypeStage",on_delete=models.CASCADE)
     Organisme = models.ForeignKey("OrganismedAccueil",on_delete=models.CASCADE)
 
