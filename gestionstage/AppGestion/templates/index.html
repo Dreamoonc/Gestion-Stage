@@ -8,7 +8,87 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hello world</h1>
+   
+<select name="selectionDeTable" id="table">
+    <option value="stagiaires">table stagiaires</option>
+    <option value="encadrants">table encadrants</option>
+    <option value="organismes">table organismes </option>
+ </select> 
+
+    <h2>table stagiaires</h2>
+    
+    <table border="1">
+        <tr>
+          <th>matricule</th>
+          <th>nom </th>
+          <th>prenom </th>
+          <th>niveau d'etude</th>
+        </tr>
+        {% for p in stagiaire %}
+        <tr>
+         <td>{{p.matricule}}</td>
+         <td>{{p.NomStagiaire}}</td>
+         <td>{{p.PrenomStagiaire}}</td>
+         <td>{{p.NivEtude}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+
+      <h2>table Encadrant</h2>
+      <table border="1">
+          <tr>
+            <th>nom et prenom </th>
+          </tr>
+          {% for p in encadrant %}
+          <tr>
+           <td>{{p.NomPrenomEn}}</td>
+          </tr>
+        {% endfor %}
+        </table>
+
+        <h2>table organisme</h2>
+        <table border="1">
+          <tr>
+            <th>nom organisme</th>
+            <th>type d'organisme</th>
+          </tr>
+          {% for p in organisme %}
+          <tr>
+           <td>{{p.NomOrganisme}}</td>
+           <td>{{p.typeOr}}</td>
+          </tr>
+        {% endfor %}
+        </table>
+
+        <h2> table stage </h2>
+        <table border="1">
+          <tr>
+            <th>nom de stage </th>
+            <th>nom de lorganizme </th>
+          </tr>
+          {% for p in stage %}
+            <tr>
+              <td> {{p.NomStage}}</td>
+              <td> {{p.Organisme.NomOrganisme}}</td>            
+             </tr>
+         {% endfor %}
+        </table>
+        
+        <h2> table promoteur </h2>
+        <table border="1">
+          <tr>
+            <th>nom de promoteur </th>
+            <th>nom de organisme </th>
+          </tr>
+          {% for p in promoteur %}
+            <tr>
+              <td> {{p.NomPrenomPro}}</td>
+              <td> {{p.Organisme.NomOrganisme}}</td>            
+             </tr>
+         {% endfor %}
+        </table>
+      
     
 </body>
 </html>
