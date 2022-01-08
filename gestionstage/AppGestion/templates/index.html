@@ -14,7 +14,9 @@
     <option value="encadrants">table encadrants</option>
     <option value="organismes">table organismes </option>
  </select> 
-
+{%for massege in messages %}
+<p>{{message}}</p>
+{%endfor%}
     <h2>table stagiaires</h2>
     
     <table border="1">
@@ -23,13 +25,15 @@
           <th>nom </th>
           <th>prenom </th>
           <th>niveau d'etude</th>
+          <th>remove</th>
         </tr>
         {% for p in stagiaire %}
         <tr>
-         <td>{{p.matricule}}</td>
+         <td>{{p.matricule}}    </td>
          <td>{{p.NomStagiaire}}</td>
          <td>{{p.PrenomStagiaire}}</td>
          <td>{{p.NivEtude}}</td>
+         <td> <a href="{% url 'delete_Stagaire' p.matricule %}"  class="btn btn-danger"> delete </a> </td>
         </tr>
         {% endfor %}
       </table>
@@ -39,10 +43,12 @@
       <table border="1">
           <tr>
             <th>nom et prenom </th>
+            <th>remove</th>
           </tr>
           {% for p in encadrant %}
           <tr>
            <td>{{p.NomPrenomEn}}</td>
+           <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn btn-danger"> delete </a> </td>
           </tr>
         {% endfor %}
         </table>
@@ -52,11 +58,13 @@
           <tr>
             <th>nom organisme</th>
             <th>type d'organisme</th>
+            <th>remove</th>
           </tr>
           {% for p in organisme %}
           <tr>
            <td>{{p.NomOrganisme}}</td>
            <td>{{p.typeOr}}</td>
+           <td> <a href="{% url 'delete_organisme' p.NomOrganisme %}"  class="btn btn-danger"> delete </a> </td>
           </tr>
         {% endfor %}
         </table>
@@ -66,11 +74,14 @@
           <tr>
             <th>nom de stage </th>
             <th>nom de lorganizme </th>
+            <th>remove</th>
           </tr>
           {% for p in stage %}
             <tr>
               <td> {{p.NomStage}}</td>
-              <td> {{p.Organisme.NomOrganisme}}</td>            
+              <td> {{p.Organisme.NomOrganisme}}</td>   
+              <td> <a href="{% url 'delete_stage' p.id %}"  class="btn btn-danger"> delete </a> </td>
+       
              </tr>
          {% endfor %}
         </table>
@@ -80,15 +91,16 @@
           <tr>
             <th>nom de promoteur </th>
             <th>nom de organisme </th>
+            <th>remove</th>
           </tr>
           {% for p in promoteur %}
             <tr>
               <td> {{p.NomPrenomPro}}</td>
-              <td> {{p.Organisme.NomOrganisme}}</td>            
+              <td> {{p.Organisme.NomOrganisme}}</td>   
+              <td> <a href="{% url 'delete_promoteur' p.id %}"  class="btn btn-danger"> delete </a> </td>
+        
              </tr>
          {% endfor %}
         </table>
-      
-    
 </body>
 </html>
