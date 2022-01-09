@@ -9,16 +9,14 @@
 </head>
 <body>
    
-<select name="selectionDeTable" id="table">
-    <option value="stagiaires">table stagiaires</option>
-    <option value="encadrants">table encadrants</option>
-    <option value="organismes">table organismes </option>
- </select> 
 {%for massege in messages %}
 <p>{{message}}</p>
 {%endfor%}
     <h2>table stagiaires</h2>
-    
+    <form action="" methode="get">
+      {{myFilter1.form}}
+      <button type="submit"> Search </button>
+    </form>
     <table border="1">
         <tr>
           <th>matricule</th>
@@ -37,9 +35,30 @@
         </tr>
         {% endfor %}
       </table>
-
+      <div class="pagination">
+        <span class="step-links">
+            {% if stagiaire.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ stagiaire.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ stagiaire.number }} of {{ stagiaire.paginator.num_pages }}.
+            </span>
+    
+            {% if stagiaire.has_next %}
+                <a href="?page={{ stagiaire.next_page_number }}">next</a>
+                <a href="?page={{ stagiaire.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+  
 
       <h2>table Encadrant</h2>
+      <form action="" methode="get">
+        {{enca.form}}
+        <button type="submit"> Search </button>
+      </form>
       <table border="1">
           <tr>
             <th>nom et prenom </th>
@@ -52,8 +71,30 @@
           </tr>
         {% endfor %}
         </table>
+        <div class="pagination">
+          <span class="step-links">
+              {% if encadrant.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ encadrant.previous_page_number }}">previous</a>
+              {% endif %}
+      
+              <span class="current">
+                  Page {{ encadrant.number }} of {{ encadrant.paginator.num_pages }}.
+              </span>
+      
+              {% if encadrant.has_next %}
+                  <a href="?page={{ encadrant.next_page_number }}">next</a>
+                  <a href="?page={{ encadrant.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    
 
         <h2>table organisme</h2>
+        <form action="" methode="get">
+          {{variable.form}}
+          <button type="submit"> Search </button>
+        </form>
         <table border="1">
           <tr>
             <th>nom organisme</th>
@@ -68,8 +109,29 @@
           </tr>
         {% endfor %}
         </table>
-
+        <div class="pagination">
+          <span class="step-links">
+              {% if organisme.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ organisme.previous_page_number }}">previous</a>
+              {% endif %}
+      
+              <span class="current">
+                  Page {{ organisme.number }} of {{ organisme.paginator.num_pages }}.
+              </span>
+      
+              {% if organisme.has_next %}
+                  <a href="?page={{ organisme.next_page_number }}">next</a>
+                  <a href="?page={{ organisme.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    
         <h2> table stage </h2>
+        <form action="" methode="get">
+          {{sta.form}}
+          <button type="submit"> Search </button>
+        </form>
         <table border="1">
           <tr>
             <th>nom de stage </th>
@@ -85,8 +147,29 @@
              </tr>
          {% endfor %}
         </table>
+        <div class="pagination">
+          <span class="step-links">
+              {% if stage.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ stage.previous_page_number }}">previous</a>
+              {% endif %}
+      
+              <span class="current">
+                  Page {{ stage.number }} of {{ stage.paginator.num_pages }}.
+              </span>
+      
+              {% if stage.has_next %}
+                  <a href="?page={{ stage.next_page_number }}">next</a>
+                  <a href="?page={{ stage.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
         
         <h2> table promoteur </h2>
+        <form action="" methode="get">
+          {{pro.form}}
+          <button type="submit"> Search </button>
+        </form>
         <table border="1">
           <tr>
             <th>nom de promoteur </th>
@@ -102,5 +185,22 @@
              </tr>
          {% endfor %}
         </table>
+        <div class="pagination">
+          <span class="step-links">
+              {% if promoteur.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ promoteur.previous_page_number }}">previous</a>
+              {% endif %}
+      
+              <span class="current">
+                  Page {{ promoteur.number }} of {{ promoteur.paginator.num_pages }}.
+              </span>
+      
+              {% if promoteur.has_next %}
+                  <a href="?page={{ promoteur.next_page_number }}">next</a>
+                  <a href="?page={{ promoteur.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
 </body>
 </html>

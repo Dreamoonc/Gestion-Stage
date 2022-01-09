@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render,HttpResponse
 from django.contrib import  messages  
 from django.http.response import HttpResponse
 from .models import *
-
+from .filters import *
 # Create your views here.
 def index (request):
     stagiaires=Stagiaire.objects.all()
@@ -11,9 +11,20 @@ def index (request):
     promoteurs=Promoteur.objects.all()
     stages=Stage.objects.all()
     fiche_Stages=Fiche_Stage.objects.all()
-    
+    myFilter1 =StagaireFilter(request.GET, queryset=stagiaires)
+    stagiaires=myFilter1.qs
+    variable =OrganismeFilter(request.GET, queryset=organismes)
+    organismes=variable.qs
+    sta= StageFilter(request.GET, queryset=organismes)
+    stages=sta.qs
+    enca=EncaderantFilter(request.GET, queryset=organismes)
+    encadrants=enca.qs
+    pro =PromoteurFilter(request.GET, queryset=organismes)
+    promoteurs=pro.qs
     return render(request,'index.html',{'stagiaire':stagiaires,'encadrant':encadrants
-                   ,'organisme':organismes,'promoteur':promoteurs,'stage':stages,'ficheS':fiche_Stages})
+                   ,'organisme':organismes,'promoteur':promoteurs,'stage':stages,'ficheS':fiche_Stages
+                   ,'myFilter1':myFilter1 , 'variable':variable , 'sta': sta , 'enca':enca 
+                   ,'pro':pro})
 
 def delete_Stagaire (request,myid) :
     item = Stagiaire.objects.get(matricule =myid)
