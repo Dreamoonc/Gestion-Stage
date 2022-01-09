@@ -24,7 +24,7 @@ class PromoteurFilter(django_filters.FilterSet):
        fields = '__all__'
 
 class EncaderantFilter(django_filters.FilterSet):
-    NomrenomEn= CharFilter(field_name='NomPrenomEn' , lookup_expr='icontains' )
+    NomPrenomEn= CharFilter(field_name='NomPrenomEn' , lookup_expr='icontains' )
 
     class  Meta :
        model = Encadrant
