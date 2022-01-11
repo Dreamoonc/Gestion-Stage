@@ -8,11 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-   
+
 {%for massege in messages %}
 <p>{{message}}</p>
 {%endfor%}
     <h2>table stagiaires</h2>
+    <h3>ajout table :</h3>
+    <form  method="post">
+      {% csrf_token %}
+    {{formStagiaire}}
+    <input type="submit" value="Add">
+    </form>
+    <h3>filtrage table :</h3>
     <form action="" methode="get">
       {{myFilter1.form}}
       <button type="submit"> Search </button>
@@ -55,6 +62,13 @@
   
 
       <h2>table Encadrant</h2>
+      <h3>ajout table :</h3>
+      <form  method="post">
+        {% csrf_token %}
+      {{formEncadrant}}
+      <input type="submit" value="Add">
+      </form>
+      <h3>filtrage table :</h3>
       <form action="" methode="get">
         {{enca.form}}
         <button type="submit"> Search </button>
@@ -91,6 +105,13 @@
     
 
         <h2>table organisme</h2>
+        <h3>ajout table :</h3>
+        <form  method="post">
+          {% csrf_token %}
+        {{formOrganisme}}
+        <input type="submit" value="Add">
+        </form>
+        <h3>filtrage table :</h3>
         <form action="" methode="get">
           {{variable.form}}
           <button type="submit"> Search </button>
@@ -128,6 +149,13 @@
       </div>
     
         <h2> table stage </h2>
+        <h3>ajout table :</h3>
+        <form  method="post">
+          {% csrf_token %}
+        {{formStage}}
+        <input type="submit" value="Add">
+        </form>
+        <h3>filtrage table :</h3>
         <form action="" methode="get">
           {{sta.form}}
           <button type="submit"> Search </button>
@@ -166,6 +194,13 @@
       </div>
         
         <h2> table promoteur </h2>
+        <h3>ajout table :</h3>
+        <form  method="post">
+          {% csrf_token %}
+        {{formPromoteur}}
+        <input type="submit" value="Add">
+        </form>
+        <h3>filtrage table :</h3>
         <form action="" methode="get">
           {{pro.form}}
           <button type="submit"> Search </button>
