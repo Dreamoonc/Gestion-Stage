@@ -1,14 +1,25 @@
-from django.forms import ModelForm
+from django.forms import ModelForm ,NumberInput,TextInput,Select
 from .models import *
 
 class StagiaireForm (ModelForm):
     class Meta:
         model=Stagiaire
         fields="__all__"
+        widgets = {
+            'matricule': NumberInput(attrs={'class': 'form-control' }),
+            'NomStagiaire': NumberInput(attrs={'class': 'form-control'}),
+            'NomStagiaire': TextInput(attrs={'class': 'form-control'}),
+            'PrenomStagiaire': TextInput(attrs={'class': 'form-control'}),
+            'NivEtude':Select(attrs={'class': 'form-control'})
+        }
+
 class EncadrantForm (ModelForm):
     class Meta:
         model=Encadrant
         fields="__all__"
+        widgets = {
+            'NomPrenomEn': TextInput(attrs={'class': 'input' }),
+        }
 class OrganismeForm (ModelForm):
     class Meta:
         model=Organisme
