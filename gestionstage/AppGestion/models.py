@@ -17,7 +17,7 @@ NIV_ETUDE=(
 
 
 class Stagiaire (models.Model):
-    matricule= models.CharField(max_length=15,primary_key=True)
+    matricule= models.IntegerField(primary_key=True)
     NomStagiaire=models.CharField(max_length=15)
     PrenomStagiaire=models.CharField(max_length=30)
     NivEtude=models.IntegerField(choices=NIV_ETUDE)
