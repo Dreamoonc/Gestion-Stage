@@ -22,7 +22,7 @@ class Stagiaire (models.Model):
     PrenomStagiaire=models.CharField(max_length=30)
     NivEtude=models.IntegerField(choices=NIV_ETUDE)
     def __str__(self):
-        return self.NomStagiaire +' '+self.PrenomStagiaire
+        return str(self.matricule)
     class Meta:
         ordering = ['NivEtude']
 
