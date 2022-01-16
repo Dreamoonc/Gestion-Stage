@@ -23,6 +23,16 @@ def stagiaire (request):
         formStagiaire=StagiaireForm
         
     return render(request,'stagiaire.html',{'stagiaire':stagiaires,'myFilter1':myFilter1,'formStagiaire':formStagiaire})
+def formulaireStage(request ):
+    ficheStage= Fiche_Stage.objects.all()
+    if request.method=="POST":
+        formficheStage =formFichStage(data=request.POST)
+        if formficheStage.is_valid():
+            formficheStage.save()
+            return redirect("formulaireStage")
+    else:
+        formficheStage=formFichStage
+    return render(request,'formulaireStage.html',{'fiche':ficheStage ,'formFichStage':formficheStage})
 
 def encadrant(request):
     encadrants=Encadrant.objects.all()

@@ -32,3 +32,9 @@ class StageForm (ModelForm):
     class Meta:
         model=Stage
         fields="__all__"
+
+class formFichStage (ModelForm):
+    class Meta :
+        model=Fiche_Stage
+        fields="__all__"
+        exclude =['Groupe','matricule','Sujet']
