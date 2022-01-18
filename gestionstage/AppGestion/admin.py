@@ -4,7 +4,7 @@ from .models import Encadrant
 from .models import Organisme
 from .models import Promoteur
 from .models import Stage
-from .models import Fiche_Stage
+from .models import *
 
 
 

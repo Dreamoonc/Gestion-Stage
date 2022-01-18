@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/static/styleLogin.css">
+    <title>Gestion de Stage _ Login</title>
 </head>
 <body>
-    
+
+    <div class="main">
+        <div class="wrapper">
+        <p class="sign" align="center">Bienvenue</p>
+          <input  id="username" type="text" align="center" placeholder="Utilisateur">
+          <input  id="password" type="password" align="center" placeholder="Mot de passe">
+          <div class="button" align="center">
+            <a class="submit" align="center" onclick="validate()">Entrer</a>
+          </div>    
+        </div>                      
+    </div>
+
+
+        <script>
+            function validate(){
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if ( username == "admin" && password == "admin"){
+            alert ("Vous vous etes bien connecter");
+            window.location = "{% url 'stagiaire'%}"; // Redirecting to other page.
+            return false;
+            }
+            else{
+                if (username != "admin") {
+                    alert ("Nom d'utilisateur incorrect");
+                    return false;
+                }
+                alert ("Mot de passe incorrect");
+                return false;
+            }
+            }
+        </script>
+
 </body>
 </html>

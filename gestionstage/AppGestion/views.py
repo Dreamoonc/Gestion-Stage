@@ -10,7 +10,7 @@ def stagiaire (request):
     stagiaires=Stagiaire.objects.all()
     myFilter1 =StagaireFilter(request.GET, queryset=stagiaires)
     stagiaires=myFilter1.qs
-    paginator= Paginator(stagiaires,6)
+    paginator= Paginator(stagiaires,5)
     page_number=request.GET.get('page')
     stagiaires=paginator.get_page(page_number)
     
@@ -23,12 +23,22 @@ def stagiaire (request):
         formStagiaire=StagiaireForm
         
     return render(request,'stagiaire.html',{'stagiaire':stagiaires,'myFilter1':myFilter1,'formStagiaire':formStagiaire})
+def formulaireStage(request ):
+    ficheStage= Fiche_Stage.objects.all()
+    if request.method=="POST":
+        formficheStage =formFichStage(data=request.POST)
+        if formficheStage.is_valid():
+            formficheStage.save() 
+            return redirect("formulaireStage")
+    else:
+        formficheStage=formFichStage
+    return render(request,'formulaireStage.html',{'fiche':ficheStage ,'formFichStage':formficheStage})
 
 def encadrant(request):
     encadrants=Encadrant.objects.all()
     enca=EncaderantFilter(request.GET, queryset=encadrants)
     encadrants=enca.qs
-    paginator2= Paginator(encadrants,6)
+    paginator2= Paginator(encadrants,5)
     page_number=request.GET.get('page')
     encadrants=paginator2.get_page(page_number)
     if request.method=="POST":
@@ -44,7 +54,7 @@ def organisme(request):
     organismes=Organisme.objects.all()
     variable =OrganismeFilter(request.GET, queryset=organismes)
     organismes=variable.qs
-    paginator5= Paginator(organismes,6)
+    paginator5= Paginator(organismes,5)
     page_number=request.GET.get('page')
     organismes=paginator5.get_page(page_number)
     if request.method=="POST":
@@ -60,7 +70,7 @@ def promoteur(request):
     promoteurs=Promoteur.objects.all()
     pro =PromoteurFilter(request.GET, queryset=promoteurs)
     promoteurs=pro.qs
-    paginator4= Paginator(promoteurs,6)
+    paginator4= Paginator(promoteurs,5)
     page_number=request.GET.get('page')
     promoteurs=paginator4.get_page(page_number)
     if request.method=="POST":
@@ -76,7 +86,7 @@ def stage(request):
     stages=Stage.objects.all()
     sta= StageFilter(request.GET, queryset=stages)
     stages=sta.qs
-    paginator3= Paginator(stages,6)
+    paginator3= Paginator(stages,5)
     page_number=request.GET.get('page')
     stages=paginator3.get_page(page_number)
     if request.method=="POST":
