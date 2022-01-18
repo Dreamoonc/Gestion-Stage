@@ -1,0 +1,79 @@
+body {
+    background-color: #e6e6e6;
+    height: 95vh;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    background-color: #FFFFFF;
+    width: 400px;
+    height:auto;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.wrapper{
+    padding-top: 40px;
+    padding-bottom: 60px;
+
+}
+
+.sign {
+    color: #000000;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+    margin-bottom: 60px;
+}
+
+input {
+width: 76%;
+color: rgb(38, 50, 56);
+font-weight: 700;
+font-size: 14px;
+letter-spacing: 1px;
+background: rgba(136, 126, 126, 0.04);
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+outline: none;
+box-sizing: border-box;
+border: 2px solid rgba(0, 0, 0, 0.02);
+margin-bottom: 50px;
+margin-left: 46px;
+text-align: center;
+margin-bottom: 27px;
+font-family: 'Ubuntu', sans-serif;
+
+}
+
+input::placeholder{
+    font-weight: 100;
+}
+
+input:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+    
+}
+.button{
+    margin-top: 30px;
+}
+
+.submit {
+    cursor: pointer;
+    border-radius: 5rem;
+    color: #fff;
+    background: black;
+    border: #000000 solid 2px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    font-weight:600;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
