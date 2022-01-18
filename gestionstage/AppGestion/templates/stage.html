@@ -6,28 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
     crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/style.css">
     <title>Gestion Table</title>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <ul class="navbarList">
-          <li class="active"><a href="{% url 'stagiaire'%}">Stagiaire</a></li>
-          <li><a href="{% url 'encadrant'%}">Encadrant</a></li>
-          <li><a href="{% url 'organisme'%}">Organisme</a></li>
-          <li><a href="{% url 'promoteur'%}">Promoteur</a></li>
-          <li><a href="{% url 'stage'%}">stage</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="menu_bar">
+    <h1 class="logo">gestion<span>Stage.</span></h1>
+    <ul >
+      <li ><a  href="{% url 'stagiaire'%}">tables<i class="fas fa-caret-down"></i></a>
+        <div class="dropdown__menu">
+          <ul>
+            <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
+            <li><a href="{% url 'encadrant'%}">encadrant</a></li>
+            <li><a href="{% url 'organisme'%}">promoteur</a></li>
+            <li><a href="{% url 'promoteur'%}">organisme</a></li>
+            <li><a href="{% url 'stage'%}">stage</a></li>
+          </ul>
+        </div>
+      </li>
+      <li ><a  href="{% url 'formulaireStage'%}">formulaire</a></li>
+      <li ><a  href="#">statistique</a> </li>
+    </ul>
+  </div>
 
-      
+     <div class="contenue">
       <h2> table stage </h2>
-      <h3>ajout table :</h3>
-      <div class="wrapper">
-        <a href="#ajout-Stage">Ajouter</a>
-      </div>
+      
       <div id="ajout-Stage" class="modal">
         <div class="modal__content">
           <form  method="post">
@@ -51,13 +56,15 @@
         {{sta.form}}
         <button type="submit"> Search </button>
       </form>
-      <table border="1">
+      <table >
+        <thead>
         <tr>
           <th>nom de stage </th>
           <th>nom de lorganizme </th>
           <th>NivEtude</th>
           <th>remove</th>
         </tr>
+      </thead>
         {% for p in stage %}
           <tr>
             <td> {{p.NomStage}}</td>
@@ -85,7 +92,10 @@
             {% endif %}
         </span>
     </div>
- 
+    <div class="wrapper s">
+        <a href="#ajout-Stage">Ajouter</a>
+      </div>
+ </div> 
     
 </body>
 </html>

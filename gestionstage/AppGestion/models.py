@@ -22,7 +22,7 @@ class Stagiaire (models.Model):
     PrenomStagiaire=models.CharField(max_length=30)
     NivEtude=models.IntegerField(choices=NIV_ETUDE)
     def __str__(self):
-        return str(self.matricule)
+        return str(self.matricule)+' '+ self.NomStagiaire +' '+ self.PrenomStagiaire
     class Meta:
         ordering = ['NivEtude']
 
@@ -64,15 +64,18 @@ class Stage (models.Model):
 
 
 class Fiche_Stage (models.Model):
+    Groupe=models.IntegerField(default=0)
     Organisme=models.ForeignKey("Organisme",on_delete=models.CASCADE)
     Stage=models.ForeignKey("Stage",on_delete=models.CASCADE)
-    matricule=models.ForeignKey("Stagiaire",on_delete=models.CASCADE)
     NivEtude =models.IntegerField(choices=NIV_ETUDE_STAGE)
+    etudiantPremier=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='Fiche_Stage')
+    etudiantdeux=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='etudiants')
+    etudianttroi=models.ForeignKey("stagiaire",on_delete=models.CASCADE)
     Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE)
     Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
-    Groupe=models.IntegerField()
     Sujet = models.CharField(max_length=60,unique=True,null=True,blank=True)
 
     class Meta:
-        unique_together = (('matricule','NivEtude','AnneeCourante'),)
+        unique_together = (('Groupe','NivEtude','AnneeCourante'))
+
