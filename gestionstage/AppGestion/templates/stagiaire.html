@@ -21,24 +21,26 @@
   <div class="menu_bar">
     <h1 class="logo">gestion<span>Stage.</span></h1>
     <ul >
-      <li ><a  href="{% url 'stagiaire'%}">tables<i class="fas fa-caret-down"></i></a>
+      <li ><a  href="">Tables <i class="fas fa-caret-down"></i></a>
         <div class="dropdown__menu">
           <ul>
             <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
             <li><a href="{% url 'encadrant'%}">encadrant</a></li>
-            <li><a href="{% url 'organisme'%}">promoteur</a></li>
-            <li><a href="{% url 'promoteur'%}">organisme</a></li>
+            <li><a href="{% url 'organisme'%}">organisme</a></li>
+            <li><a href="{% url 'promoteur'%}">promoteur</a></li>
             <li><a href="{% url 'stage'%}">stage</a></li>
           </ul>
         </div>
       </li>
-      <li ><a  href="{% url 'formulaireStage'%}">formulaire</a></li>
-      <li ><a  href="#">statistique</a> </li>
+      <li ><a  href="{% url 'formulaireStage'%}">Formulaire</a></li>
+      <li ><a  href="#">Statistique</a> </li>
     </ul>
   </div>
   
 </header>
+
 <div class="contenue">
+
     <h2>table stagiaires</h2>
     
    
@@ -54,19 +56,19 @@
                 </div>
               {% endfor %}
           </div>
-        <input type="submit" value="Add" onclick="location.href='index.html';" />
+        <input class="button" type="submit" value="Add"  />
         </form>
           <a href="#" class="modal__close">&times;</a>
       </div>
     </div>
     
-    <h3>filtrage table :</h3>
+    <div class="filtrage">
     <form action="" methode="get">
       {{myFilter1.form}}
-      <button type="submit"> Search </button>
+      <button class="button" type="submit"> Search </button>
     </form>
-    
-    
+
+   </div>
     
     <table >
       <thead>
@@ -75,7 +77,7 @@
           <th>nom </th>
           <th>prenom </th>
           <th>niveau d'etude</th>
-          <th>remove</th>
+          <th>action</th>
         </tr>
       </thead>
         {% for p in stagiaire %}
@@ -84,7 +86,7 @@
          <td>{{p.NomStagiaire}}</td>
          <td>{{p.PrenomStagiaire}}</td>
          <td>{{p.NivEtude}}</td>
-         <td> <a href="{% url 'delete_Stagaire' p.matricule %}"  class="btn btn-danger"> delete </a> </td>
+         <td> <a href="{% url 'delete_Stagaire' p.matricule %}"  class="btn btn-danger">delete</a> </td>
         </tr>
         {% endfor %}
       </table>
@@ -105,7 +107,7 @@
             {% endif %}
         </span>
     </div> 
-    <div class="wrapper s">
+    <div class="wrapper">
       <a href="#ajout-stagiaire">Ajouter</a>
     </div>
 </div>

@@ -68,14 +68,14 @@ class Fiche_Stage (models.Model):
     Organisme=models.ForeignKey("Organisme",on_delete=models.CASCADE)
     Stage=models.ForeignKey("Stage",on_delete=models.CASCADE)
     NivEtude =models.IntegerField(choices=NIV_ETUDE_STAGE)
-    etudiantPremier=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='Fiche_Stage')
-    etudiantdeux=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='etudiants')
-    etudianttroi=models.ForeignKey("stagiaire",on_delete=models.CASCADE)
+    Etudiant1=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='Fiche_Stage')
+    Etudiant2=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='etudiants')
+    Etudiant3=models.ForeignKey("stagiaire",on_delete=models.CASCADE)
     Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE)
     Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
     Sujet = models.CharField(max_length=60,unique=True,null=True,blank=True)
 
     class Meta:
-        unique_together = (('Groupe','NivEtude','AnneeCourante'))
+        unique_together = (('Groupe','AnneeCourante'))
 

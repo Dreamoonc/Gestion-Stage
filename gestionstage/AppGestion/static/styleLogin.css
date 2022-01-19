@@ -67,7 +67,6 @@ input:focus {
     border-radius: 5rem;
     color: #fff;
     background: black;
-    border: #000000 solid 2px;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 10px;
@@ -76,4 +75,8 @@ input:focus {
     font-size: 13px;
     font-weight:600;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.submit:hover{
+    background-color: #00c3d1;
 }

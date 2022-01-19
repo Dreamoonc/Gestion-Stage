@@ -4,7 +4,7 @@ from django_filters import CharFilter
 from .models import *
 
 class StagaireFilter(django_filters.FilterSet):
-    NomStagiaire= CharFilter(field_name='NomStagiaire' , lookup_expr='icontains' )
+    NomStagiaire= CharFilter(field_name='NomStagiaire' , lookup_expr='icontains')
     PrenomStagiaire= CharFilter(field_name='PrenomStagiaire' , lookup_expr='icontains' )
     class  Meta :
        model = Stagiaire
