@@ -1,25 +1,25 @@
 
 
-.wrapper a {
-    display: inline-block;
-    text-decoration: none;
-    padding: 10px;
-    padding-right: 20px;
-    padding-left: 20px;
-    border: #686868 3px solid;
-    border-radius: 8px;
-    text-transform: uppercase;
-    color: rgb(0, 0, 0);
+body{
+    font-size: 0.9rem;
     font-family: 'Roboto', sans-serif;
+    
+}
+
+.wrapper{
+    margin-top: 20px;
+}
+.wrapper a {
+    background-color: #000;
+    text-decoration: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color:#fff;
 }
 .wrapper a:hover{
-    color: #fff;
-    background-color: #686868;
+    background-color: #00c3d1;
 }
-.s{
-margin-left: 65%;
-}
-  
+
 .modal {
     visibility: hidden;
     opacity: 0;
@@ -50,15 +50,39 @@ margin-left: 65%;
 }
 .modal__content .form{
     padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .modal__content .field{
-    
     padding: 10px;
-
 }
 .modal__content .input{
+    border: #e6e6e6 2px solid;
+    width: 400px;
+    height: 35px;
+    border-radius: 5px ;
+    display: block;
+}
 
-    background-color: aqua;
+.modal .button{
+    background-color: #000;
+    color: #fff;
+    padding: 5px 30px;
+    border:0;
+    float: right;
+    margin-right: 20px;
+}
+.modal .button:hover{
+    background-color:#00c3d1;
+}
+.button{
+    background-color: #00c3d1;
+    color: #fff;
+    padding: 5px 20px;
+    border:0;
+    margin-left: 10px;
 }
  
 .modal__close {
@@ -73,50 +97,58 @@ margin-left: 65%;
     color:#999;
     font-size:40px;
 }
-body{
-    display: block;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.9rem;
-}
 h2{
     margin-top: 90px;
-    margin-left: 200px;
+    margin-bottom: 30px;
+    word-spacing: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.filtrage{
+    float: left;
+
 }
 table{
-    
+    margin-top: 50px;
+    margin-bottom: 15px;
     border-collapse: collapse;
-    box-shadow: 0 5px 10px gray;
+    box-shadow: 0 5px 10px rgb(221, 221, 221);
     background-color: white;
     text-align: left;
-    overflow: hidden;
-     width: 800px;
-    
-}
-.contenue{
-    margin-left: 22%;
+    overflow: hidden;    
 }
 
+
 tr:nth-child(even){
-       background-color: rgb(211, 208, 208); 
+       background-color: #e6e6e6; 
 }
 thead{
-    box-shadow: 0 5px 10px gray;
+    background-color: #000000;
+    color: #fff;
 }
 th{
-    padding: 1rem 2rem ; 
+    font-size: 13px;
+    padding: 5px 2rem ; 
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    font-weight: 900;
+    font-weight:normal ;
 }
 td{
-    padding: 1rem 2rem;
+    padding: 5px 2rem;
+    text-align: center;
 }
+
+.contenue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 
 .menu_bar{
     margin: 0;
-    background-color: rgb(211, 208, 208); 
-    height:80px;
+    height:60px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -129,14 +161,15 @@ td{
 }
 .logo{
     color: rgb(255, 255, 255) ;
-    font-size: 30px;
+    font-size: 28px;
 }
 .logo span {
-    color: blue;
+    color: #00c3d1;
 }
 .menu_bar ul {
     list-style: none;
     display: flex;
+    padding-top: 10px;
 }
 .menu_bar ul li {
     padding: 10px 30px;
@@ -144,19 +177,18 @@ td{
 .menu_bar ul li a {
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     transition: all 0.3s;
 }
 .menu_bar ul li a:hover{
-    color: blue;
+    color: #00c3d1;
 }
 .dropdown__menu{
     display: none;
 }
 .menu_bar ul li:hover .dropdown__menu{
     display: block;
-    position: absolute;
-    
+    position: absolute;  
     background-color: rgb(0, 0, 20);
 }
 .dropdown__menu ul {
@@ -165,6 +197,27 @@ td{
     padding: 10px;
 }
 .gg {
-    padding-top: 90px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 
 }
+
+.input{
+    border: #e6e6e6 2px solid;
+    width: 400px;
+    height: 35px;
+    border-radius: 5px ;
+    display: block;
+}
+/* 
+.gg .form{
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    width: 1000px;
+
+} */

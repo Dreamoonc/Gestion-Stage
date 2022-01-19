@@ -16,13 +16,13 @@
     <div class="menu_bar">
       <h1 class="logo">gestion<span>Stage.</span></h1>
       <ul >
-        <li ><a  href="{% url 'stagiaire'%}">tables<i class="fas fa-caret-down"></i></a>
+        <li ><a  href="">tables<i class="fas fa-caret-down"></i></a>
           <div class="dropdown__menu">
             <ul>
               <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
               <li><a href="{% url 'encadrant'%}">encadrant</a></li>
-              <li><a href="{% url 'organisme'%}">promoteur</a></li>
-              <li><a href="{% url 'promoteur'%}">organisme</a></li>
+              <li><a href="{% url 'organisme'%}">organisme</a></li>
+            <li><a href="{% url 'promoteur'%}">promoteur</a></li>
               <li><a href="{% url 'stage'%}">stage</a></li>
             </ul>
           </div>
@@ -33,10 +33,8 @@
     </div>
     </header>
  <div class="contenue">
-        <h2>table Encadrant</h2>
        
-        
-        <div id="ajout-encadrant" class="modal">
+        <div class="modal">
           <div class="modal__content">
             <form  method="post">
               {% csrf_token %}
@@ -48,16 +46,18 @@
                     </div>
                   {% endfor %}
               </div>
-            <input type="submit" value="Add" onClick="myFunction()">
+            <input  class="button" type="submit" value="Add" ">
             </form>
               <a href="#" class="modal__close">&times;</a>
           </div>
         </div>
-        <h3>filtrage table :</h3>
-        <form action="" methode="get">
-          {{enca.form}}
-          <button type="submit"> Search </button>
-        </form>
+        <h2>table Encadrant</h2>
+        <div class="filtrage">
+          <form action="" methode="get">
+            {{enca.form}}
+            <button class="button" type="submit"> Search </button>
+          </form>
+        </div>
         <table >
           <thead>
             <tr>
@@ -89,10 +89,12 @@
                 {% endif %}
             </span>
         </div>
-        <div class="wrapper s">
+      
+        <div class="wrapper">
           <a href="#ajout-encadrant">Ajouter</a>
         </div>
       </div>
+
 
 </body>
 </html>

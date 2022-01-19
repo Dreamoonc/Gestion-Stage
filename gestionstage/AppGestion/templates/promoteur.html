@@ -14,13 +14,13 @@
   <div class="menu_bar">
     <h1 class="logo">gestion<span>Stage.</span></h1>
     <ul >
-      <li ><a  href="{% url 'stagiaire'%}">tables<i class="fas fa-caret-down"></i></a>
+      <li ><a  href="">tables<i class="fas fa-caret-down"></i></a>
         <div class="dropdown__menu">
           <ul>
             <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
             <li><a href="{% url 'encadrant'%}">encadrant</a></li>
-            <li><a href="{% url 'organisme'%}">promoteur</a></li>
-            <li><a href="{% url 'promoteur'%}">organisme</a></li>
+            <li><a href="{% url 'organisme'%}">organisme</a></li>
+            <li><a href="{% url 'promoteur'%}">promoteur</a></li>
             <li><a href="{% url 'stage'%}">stage</a></li>
           </ul>
         </div>
@@ -45,15 +45,15 @@
                 </div>
               {% endfor %}
           </div>
-        <input type="submit" value="Add">
+        <input class="button" type="submit" value="Add">
         </form>
           <a href="#" class="modal__close">&times;</a>
       </div>
     </div>
-    <h3>filtrage table :</h3>
+
     <form action="" methode="get">
       {{pro.form}}
-      <button type="submit"> Search </button>
+      <button class="button" type="submit"> Search </button>
     </form>
     <table >
       <thead>
