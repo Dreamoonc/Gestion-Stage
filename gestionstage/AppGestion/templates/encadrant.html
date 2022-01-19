@@ -61,15 +61,20 @@
         <table >
           <thead>
             <tr>
-              <th>nom et prenom </th>
-              <th>remove</th>
+              <th>Nom et Prenom </th>
+              <th>Remove</th>
+              <th>Update</th>
             </tr>
           </thead>
             {% for p in encadrant %}
             <tr>
-             <td>{{p.NomPrenomEn}}</td>
-             <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn btn-danger"> delete </a> </td>
-            </tr>
+              <form method ="POST" action="/Update_Encadrant/{{p.id}}/"> 
+                  {% csrf_token %}
+               <td><textarea name="NomPrenomEn">{{p.NomPrenomEn}}</textarea></td>
+               <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn btn-danger"> delete </a> </td>
+               <td> <input type="submit" value="Update" class="btn btn-warning"> </td>
+              </form>
+              </tr>
             {% endfor %}
         </table>
           <div class="pagination">

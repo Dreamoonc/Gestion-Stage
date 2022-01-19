@@ -58,17 +58,27 @@
     <table >
       <thead>
       <tr>
-        <th>nom de promoteur </th>
-        <th>nom de organisme </th>
-        <th>remove</th>
+        <th>Nom du promoteur </th>
+        <th>Nom de l'organisme </th>
+        <th>Remove</th>
+        <th>Update</th>
       </tr>
     </thead>
       {% for p in promoteur %}
         <tr>
-          <td> {{p.NomPrenomPro}}</td>
-          <td> {{p.Organisme.NomOrganisme}}</td>   
-     <td> <a href="{% url 'delete_promoteur' p.id %}"  class="btn btn-danger"> delete </a> </td>
-         </tr>
+          <form method ="POST" action="/Update_Promoteur/{{p.id}}/"> 
+          {% csrf_token %}
+          <td><textarea name="NomPrenomPro">{{p.NomPrenomPro}}</textarea></td>
+           <td> <select name="Organisme" required id="id_Organisme"> 
+              <option value="{{p.Organisme.NomOrganisme}}" selected>{{p.Organisme.NomOrganisme}}</option>
+              {% for o in organismes %}
+              <option value={{o.NomOrganisme}}>{{o.NomOrganisme}}</option>
+              {% endfor %}
+            </select></td>  
+            <td> <a href="{% url 'delete_promoteur' p.id %}"  class="btn btn-danger"> delete </a> </td>
+            <td> <input type="submit" value="Update" class="btn btn-warning"> </td>
+          </form>
+        </tr>
      {% endfor %}
     </table>
     <div class="pagination">

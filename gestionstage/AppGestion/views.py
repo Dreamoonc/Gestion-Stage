@@ -68,6 +68,7 @@ def organisme(request):
 
 def promoteur(request):
     promoteurs=Promoteur.objects.all()
+    organismes=Organisme.objects.all()
     pro =PromoteurFilter(request.GET, queryset=promoteurs)
     promoteurs=pro.qs
     paginator4= Paginator(promoteurs,5)
@@ -80,10 +81,11 @@ def promoteur(request):
             return redirect("promoteur")
     else:
         formPromoteur=PromoteurForm
-    return render(request,'promoteur.html',{'promoteur':promoteurs,'pro':pro,'formPromoteur':formPromoteur})
+    return render(request,'promoteur.html',{'promoteur':promoteurs,'organismes':organismes,'pro':pro,'formPromoteur':formPromoteur})
 
 def stage(request):
     stages=Stage.objects.all()
+    organismes=Organisme.objects.all()
     sta= StageFilter(request.GET, queryset=stages)
     stages=sta.qs
     paginator3= Paginator(stages,5)
@@ -97,7 +99,7 @@ def stage(request):
     else:
         formStage=StageForm
 
-    return render(request,'stage.html',{'stage':stages,'sta':sta,'formStage':formStage})
+    return render(request,'stage.html',{'stage':stages,'organismes':organismes,'sta':sta,'formStage':formStage})
 
 def login(request):
     return render(request,'login.html')
@@ -133,5 +135,46 @@ def delete_stage (request,myid) :
     messages.info(request,'item delete seccely ')
     return redirect(stagiaire)
     
+def update_stagiaire (request,myid) :
+    itemup = Stagiaire.objects.get(matricule =myid)
+    form = StagiaireForm(request.POST,instance = itemup)
+    if form.is_valid():
+        form.save()
+        messages.success(request,"Record Updated Successfully!!")
+        return redirect(stagiaire)
 
+
+def update_encadrant (request,myid) :
+    itemup = Encadrant.objects.get(id =myid)
+    form = EncadrantForm(request.POST,instance = itemup)
+    if form.is_valid():
+        form.save()
+        messages.success(request,"Record Updated Successfully!!")
+        return redirect(encadrant)
+
+
+def update_promoteur (request,myid) :
+    itemup = Promoteur.objects.get(id =myid)
+    form = PromoteurForm(request.POST,instance = itemup)
+    if form.is_valid():
+        form.save()
+        messages.success(request,"Record Updated Successfully!!")
+        return redirect(promoteur)
+
+
+def update_organisme (request,myid) :
+    itemup = Organisme.objects.get(NomOrganisme =myid)
+    form = OrganismeForm(request.POST,instance = itemup)
+    if form.is_valid():
+        form.save()
+        messages.success(request,"Record Updated Successfully!!")
+        return redirect(organisme)
+
+def update_stage (request,myid) :
+    itemup = Stage.objects.get(id =myid)
+    form = StageForm(request.POST,instance = itemup)
+    if form.is_valid():
+        form.save()
+        messages.success(request,"Record Updated Successfully!!")
+        return redirect(stage)
 
