@@ -62,5 +62,5 @@ class formFichStage (ModelForm):
             'Encadrant':Select(attrs={'class': 'input'}),
             'Promoteur':Select(attrs={'class': 'input'}),
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
-            'Sujet':TextInput(attrs={'class': 'input'})
+            'Sujet':TextInput(attrs={'class': 'input hide'})
         }
