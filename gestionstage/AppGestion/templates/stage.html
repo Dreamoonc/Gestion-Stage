@@ -58,19 +58,28 @@
       <table >
         <thead>
         <tr>
-          <th>nom de stage </th>
-          <th>nom de lorganizme </th>
+          <th>Nom du Stage </th>
+          <th>Nom de l'Organizme </th>
           <th>NivEtude</th>
-          <th>remove</th>
+          <th>Remove</th>
+          <th>Update </th>
         </tr>
       </thead>
         {% for p in stage %}
           <tr>
-            <td> {{p.NomStage}}</td>
-            <td> {{p.Organisme.NomOrganisme}}</td>  
-            <td>{{p.NivEtude}}</td> 
+            <form method ="POST" action="/Update_Stage/{{p.id}}/"> 
+              {% csrf_token %}
+            <td><textarea class="table_input" name="NomStage" >{{p.NomStage}}</textarea></td>
+            <td> <select class="table_input" name="Organisme" required id="id_Organisme"> 
+              <option  value="{{p.Organisme.NomOrganisme}}" selected>{{p.Organisme.NomOrganisme}}</option>
+              {% for o in organismes %}
+              <option value={{o.NomOrganisme}}>{{o.NomOrganisme}}</option>
+              {% endfor %}
+            </select></td>  
+            <td><input class="table_input" style="width:15px;"type= "text" name="NivEtude" value={{p.NivEtude}}></td> 
             <td> <a href="{% url 'delete_stage' p.id %}"  class="btn btn-danger"> delete </a> </td>
-
+            <td> <input type="submit" value="Update" class="btn btn-warning"></td>
+            </form>
            </tr>
        {% endfor %}
       </table>

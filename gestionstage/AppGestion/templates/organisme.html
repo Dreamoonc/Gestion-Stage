@@ -60,16 +60,21 @@
     <table >
       <thead>
       <tr>
-        <th>nom organisme</th>
-        <th>type d'organisme</th>
-        <th>remove</th>
+        <th>Nom de l'Organisme</th>
+        <th>Type d'Organisme</th>
+        <th>Remove</th>
+        <th>Update</th>
       </tr>
     </thead>
       {% for p in organisme %}
       <tr>
-       <td>{{p.NomOrganisme}}</td>
-       <td>{{p.typeOr}}</td>
+        <form method ="POST" action="/Update_Organisme/{{p.NomOrganisme}}/"> 
+          {% csrf_token %}
+       <td><input  class="table_input" type="text" name="NomOrganisme" value={{p.NomOrganisme}} readonly></td>
+       <td><input  class="table_input" type="text" name="typeOr" value={{p.typeOr}}></td>
        <td> <a href="{% url 'delete_organisme' p.NomOrganisme %}"  class="btn btn-danger"> delete </a> </td>
+       <td> <input type="submit" value="Update" class="btn btn-warning"> </td>
+      </form>
       </tr>
     {% endfor %}
     </table>

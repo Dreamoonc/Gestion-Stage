@@ -212,12 +212,12 @@ td{
     border-radius: 5px ;
     display: block;
 }
-/* 
-.gg .form{
-    display: flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap: wrap;
-    width: 1000px;
+.table_input{
+    border: none;
+    background:none;
+    width: 100px;
+}
 
-} */
+.table_input:focus{
+    outline: none;
+}

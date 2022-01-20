@@ -34,7 +34,7 @@ class PromoteurForm (ModelForm):
         fields="__all__"
         widgets={
             'NomPrenomPro':TextInput(attrs={'class': 'input'}),
-            'Organisme':TextInput(attrs={'class': 'input'})
+            'Organisme':Select(attrs={'class': 'input'})
         }
 class StageForm (ModelForm):
     class Meta:
@@ -42,25 +42,25 @@ class StageForm (ModelForm):
         fields="__all__"
         widgets={
             'NomStage':TextInput(attrs={'class': 'input'}),
-            'NivEtude':NumberInput(attrs={'class': 'input'}),
-            'Organisme':TextInput(attrs={'class': 'input'})
+            'NivEtude':Select(attrs={'class': 'input'}),
+            'Organisme':Select(attrs={'class': 'input'})
         }
 
 class formFichStage (ModelForm):
     class Meta :
         model=Fiche_Stage
         fields="__all__"
-        exclude =['Sujet']
+        exclude =['AnneeCourante']
         widgets={
             'Groupe':NumberInput(attrs={'class': 'input'}),
-            'Organisme':TextInput(attrs={'class': 'input'}),
-            'Stage':TextInput(attrs={'class': 'input'}),
-            'NivEtude':NumberInput(attrs={'class': 'input'}),
-            'Etudiant1':NumberInput(attrs={'class': 'input'}),
-            'Etudiant2':NumberInput(attrs={'class': 'input'}),
-            'Etudiant3':NumberInput(attrs={'class': 'input'}),
-            'Encadrant':TextInput(attrs={'class': 'input'}),
-            'Promoteur':TextInput(attrs={'class': 'input'}),
+            'Organisme':Select(attrs={'class': 'input'}),
+            'Stage':Select(attrs={'class': 'input'}),
+            'NivEtude':Select(attrs={'class': 'input'}),
+            'Etudiant1':Select(attrs={'class': 'input'}),
+            'Etudiant2':Select(attrs={'class': 'input'}),
+            'Etudiant3':Select(attrs={'class': 'input'}),
+            'Encadrant':Select(attrs={'class': 'input'}),
+            'Promoteur':Select(attrs={'class': 'input'}),
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
             'Sujet':TextInput(attrs={'class': 'input'})
         }
