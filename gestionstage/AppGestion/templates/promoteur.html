@@ -68,8 +68,8 @@
         <tr>
           <form method ="POST" action="/Update_Promoteur/{{p.id}}/"> 
           {% csrf_token %}
-          <td><textarea name="NomPrenomPro">{{p.NomPrenomPro}}</textarea></td>
-           <td> <select name="Organisme" required id="id_Organisme"> 
+          <td><text  class="table_input" name="NomPrenomPro">{{p.NomPrenomPro}}</text></td>
+           <td> <select   class="table_input" name="Organisme" required id="id_Organisme"> 
               <option value="{{p.Organisme.NomOrganisme}}" selected>{{p.Organisme.NomOrganisme}}</option>
               {% for o in organismes %}
               <option value={{o.NomOrganisme}}>{{o.NomOrganisme}}</option>

@@ -69,14 +69,14 @@
           <tr>
             <form method ="POST" action="/Update_Stage/{{p.id}}/"> 
               {% csrf_token %}
-            <td><textarea name="NomStage" >{{p.NomStage}}</textarea></td>
-            <td> <select name="Organisme" required id="id_Organisme"> 
-              <option value="{{p.Organisme.NomOrganisme}}" selected>{{p.Organisme.NomOrganisme}}</option>
+            <td><textarea class="table_input" name="NomStage" >{{p.NomStage}}</textarea></td>
+            <td> <select class="table_input" name="Organisme" required id="id_Organisme"> 
+              <option  value="{{p.Organisme.NomOrganisme}}" selected>{{p.Organisme.NomOrganisme}}</option>
               {% for o in organismes %}
               <option value={{o.NomOrganisme}}>{{o.NomOrganisme}}</option>
               {% endfor %}
             </select></td>  
-            <td><input type= "text" name="NivEtude" value={{p.NivEtude}}></td> 
+            <td><input class="table_input" style="width:15px;"type= "text" name="NivEtude" value={{p.NivEtude}}></td> 
             <td> <a href="{% url 'delete_stage' p.id %}"  class="btn btn-danger"> delete </a> </td>
             <td> <input type="submit" value="Update" class="btn btn-warning"></td>
             </form>

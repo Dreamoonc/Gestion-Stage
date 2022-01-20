@@ -34,7 +34,7 @@
     </header>
  <div class="contenue">
        
-        <div class="modal">
+        <div id="ajout-encadrant" class="modal">
           <div class="modal__content">
             <form  method="post">
               {% csrf_token %}
@@ -70,7 +70,7 @@
             <tr>
               <form method ="POST" action="/Update_Encadrant/{{p.id}}/"> 
                   {% csrf_token %}
-               <td><textarea name="NomPrenomEn">{{p.NomPrenomEn}}</textarea></td>
+               <td><text  class="table_input" name="NomPrenomEn">{{p.NomPrenomEn}}</text></td>
                <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn btn-danger"> delete </a> </td>
                <td> <input type="submit" value="Update" class="btn btn-warning"> </td>
               </form>

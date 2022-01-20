@@ -74,7 +74,7 @@ class Fiche_Stage (models.Model):
     Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE)
     Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
-    Sujet = models.CharField(max_length=60,unique=True,null=True,blank=True)
+    Sujet = models.TextField(max_length=60,unique=True,null=True,blank=True)
 
     class Meta:
         unique_together = (('Groupe','AnneeCourante'))

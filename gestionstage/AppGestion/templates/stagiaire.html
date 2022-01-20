@@ -85,10 +85,10 @@
         <tr>
         <form method ="POST" action="/Update_Stagiaire/{{p.matricule}}/"> 
             {% csrf_token %}
-            <td><input type= "text" name="matricule" value={{p.matricule}} readonly>  </td>
-            <td><input type= "text" name="NomStagiaire" value={{p.NomStagiaire}}></td>
-            <td><input type= "text" name="PrenomStagiaire" value={{p.PrenomStagiaire}}></td>
-            <td><input type= "text" name="NivEtude" value={{p.NivEtude}}></td>
+            <td><input class="table_input" type= "text" name="matricule" value={{p.matricule}} readonly>  </td>
+            <td><input class="table_input" type= "text" name="NomStagiaire" value={{p.NomStagiaire}}></td>
+            <td><input class="table_input" type= "text" name="PrenomStagiaire" value={{p.PrenomStagiaire}}></td>
+            <td><input class="table_input" style="width:15px;"type= "text" name="NivEtude" value={{p.NivEtude}}></td>
          <td> <a href="{% url 'delete_Stagaire' p.matricule %}"  class="btn btn-danger"> delete </a> </td>
          <td> <input type="submit" value="Update" class="btn btn-warning"></td>
         </form>
