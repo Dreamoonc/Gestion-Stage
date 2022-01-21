@@ -1,3 +1,4 @@
+from enum import auto
 from django.db import models
 import datetime
 
@@ -64,17 +65,15 @@ class Stage (models.Model):
 
 
 class Fiche_Stage (models.Model):
-    Groupe=models.IntegerField(default=0)
     Organisme=models.ForeignKey("Organisme",on_delete=models.CASCADE)
     Stage=models.ForeignKey("Stage",on_delete=models.CASCADE)
     NivEtude =models.IntegerField(choices=NIV_ETUDE_STAGE)
-    Etudiant1=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='Fiche_Stage')
-    Etudiant2=models.ForeignKey("stagiaire",on_delete=models.CASCADE,related_name='etudiants')
-    Etudiant3=models.ForeignKey("stagiaire",on_delete=models.CASCADE)
+    Etudiant=models.ManyToManyField(Stagiaire)
     Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE)
     Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
     Sujet = models.TextField(max_length=60,unique=True,null=True,blank=True)
+    Groupe=models.IntegerField()
 
     class Meta:
         unique_together = (('Groupe','AnneeCourante'))

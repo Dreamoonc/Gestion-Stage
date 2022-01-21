@@ -3,6 +3,7 @@ from django.contrib import  messages
 from django.http.response import HttpResponse
 from .models import *
 from .filters import *
+from django.db.models import F
 from django.core.paginator import Paginator 
 from AppGestion.form import *
 # Create your views here.
@@ -177,4 +178,17 @@ def update_stage (request,myid) :
         form.save()
         messages.success(request,"Record Updated Successfully!!")
         return redirect(stage)
-
+def tableFormulaireStage (request):
+    tab=Fiche_Stage.objects.all()
+    myFilter1 =Fiche_StageFilter(request.GET, queryset=tab)
+    tab=myFilter1.qs
+    paginator= Paginator(tab,5)
+    page_number=request.GET.get('page')
+    tab=paginator.get_page(page_number)
+    return render(request,'tableFormulaireStage.html',{'form':tab,'myFilter1':myFilter1})
+    
+def delete_tableform(request,myid) :
+    item = Fiche_Stage.objects.get(id =myid)
+    item.delete()
+    messages.info(request,'item delete seccely ')
+    return redirect(tableFormulaireStage)

@@ -56,11 +56,9 @@ class formFichStage (ModelForm):
             'Organisme':Select(attrs={'class': 'input'}),
             'Stage':Select(attrs={'class': 'input'}),
             'NivEtude':Select(attrs={'class': 'input'}),
-            'Etudiant1':Select(attrs={'class': 'input'}),
-            'Etudiant2':Select(attrs={'class': 'input'}),
-            'Etudiant3':Select(attrs={'class': 'input'}),
             'Encadrant':Select(attrs={'class': 'input'}),
             'Promoteur':Select(attrs={'class': 'input'}),
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
-            'Sujet':TextInput(attrs={'class': 'input hide'})
+            'Sujet':TextInput(attrs={'class': 'input'})
+        
         }
