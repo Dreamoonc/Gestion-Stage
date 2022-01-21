@@ -24,7 +24,7 @@
       <li ><a  href="">Tables <i class="fas fa-caret-down"></i></a>
         <div class="dropdown__menu">
           <ul>
-            <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
+            <li><a href="{% url 'stagiaire'%}">table</a></li>
             <li><a href="{% url 'encadrant'%}">encadrant</a></li>
             <li><a href="{% url 'organisme'%}">organisme</a></li>
             <li><a href="{% url 'promoteur'%}">promoteur</a></li>
@@ -42,27 +42,12 @@
 
 <div class="contenue">
 
-    <h2>table stagiaires</h2>
+    <h2>table des fiche stage </h2>
     
    
-    <div id="ajout-stagiaire" class="modal">
-      <div class="modal__content">
-        <form  method="post">
-          {% csrf_token %}
-          <div class="form">
-            {% for field in formStagiaire%}
-                <div class="field ">
-                  <label for="{{field.id_for_label}}" class="label">{{field.html_name}}</label>
-                  {{field}}
-                </div>
-              {% endfor %}
-          </div>
-        <input class="button" type="submit" value="Add"  />
-        </form>
-          <a href="#" class="modal__close">&times;</a>
-      </div>
-    </div>
     
+              
+            
     <div class="filtrage">
     <form action="" methode="get">
       {{myFilter1.form}}
@@ -74,23 +59,26 @@
     <table >
       <thead>
         <tr>
-          <th>Matricule</th>
-          <th>Nom </th>
-          <th>Prenom </th>
-          <th>Niveau d'etude</th>
+          <th>etudiant1</th>
+          <
+          <th>encaderant</th>
+          <th>promoteur</th>
+          <th>stage</th>
+          <th>sujet</th>
           <th>Remove</th>
           <th>Update</th>
         </tr>
       </thead>
-        {% for p in stagiaire %}
+        {% for p in form %}
         <tr>
-        <form method ="POST" action="/Update_Stagiaire/{{p.matricule}}/"> 
+        <form method ="POST" action="/Update_table/{{p.matricule}}/"> 
             {% csrf_token %}
-            <td><input class="table_input" type= "text" name="matricule" value={{p.matricule}} readonly>  </td>
-            <td><input class="table_input" type= "text" name="NomStagiaire" value={{p.NomStagiaire}}></td>
-            <td><input class="table_input" type= "text" name="PrenomStagiaire" value={{p.PrenomStagiaire}}></td>
-            <td><input class="table_input" style="width:15px;"type= "text" name="NivEtude" value={{p.NivEtude}}></td>
-         <td> <a href="{% url 'delete_Stagaire' p.matricule %}"  class="btn btn-danger"> delete </a> </td>
+            <td><input type= "text" name="etudiant" value={{p.Etudiant}} readonly>  </td>
+            <td><input type= "text" name="encaderant" value={{p.Encadrant}}></td>
+            <td><input type= "text" name="promoteur" value={{p.Promoteur}}></td>
+            <td><input type= "text" name="stage" value={{p.Stage}}></td>
+            <td><input type= "text" name="sujet" value={{p.Sujet}}></td>
+         <td> <a href="{% url 'delete_tableform' p.Etudiant %}"  class="btn btn-danger"> delete </a> </td>
          <td> <input type="submit" value="Update" class="btn btn-warning"></td>
         </form>
       </tr>
@@ -98,24 +86,22 @@
       </table>
       <div class="pagination">
         <span class="step-links">
-            {% if stagiaire.has_previous %}
+            {% if form.has_previous %}
                 <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ stagiaire.previous_page_number }}">previous</a>
+                <a href="?page={{ form.previous_page_number }}">previous</a>
             {% endif %}
     
             <span class="current">
-                Page {{ stagiaire.number }} of {{ stagiaire.paginator.num_pages }}.
+                Page {{ form.number }} of {{ form.paginator.num_pages }}.
             </span>
     
-            {% if stagiaire.has_next %}
-                <a href="?page={{ stagiaire.next_page_number }}">next</a>
-                <a href="?page={{ stagiaire.paginator.num_pages }}">last &raquo;</a>
+            {% if form.has_next %}
+                <a href="?page={{ form.next_page_number }}">next</a>
+                <a href="?page={{ form.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div> 
-    <div class="wrapper">
-      <a href="#ajout-stagiaire">Ajouter</a>
-    </div>
+    
 </div>
    
 
