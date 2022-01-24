@@ -22,5 +22,9 @@ urlpatterns = [
     path('Update_Stage/<int:myid>/',update_stage,name='Update_Stage'),
     path('tableFormulaireStage/',tableFormulaireStage,name='tableFormulaireStage'),
     path('delete_tableform/<str:myid>/',delete_tableform,name='delete_tableform'),
+
+    path('ajax/load-Etudiant',views.load_Etudiant,name='ajax_load_Etudiant'),
+    path('ajax/load-Promoteur',views.load_Promoteur,name='ajax_load_Promoteur'),
+    path('ajax/load-Stage',views.load_Stage,name='ajax_load_Stage'),
     
 ]

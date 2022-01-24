@@ -60,7 +60,6 @@
       <thead>
         <tr>
           <th>etudiant1</th>
-          <
           <th>encaderant</th>
           <th>promoteur</th>
           <th>stage</th>
@@ -73,7 +72,7 @@
         <tr>
         <form method ="POST" action="/Update_table/{{p.matricule}}/"> 
             {% csrf_token %}
-            <td><input type= "text" name="etudiant" value={{p.Etudiant}} readonly>  </td>
+            <td><input type= "text" name="etudiant" value={{p.Etudiant}} >  </td>
             <td><input type= "text" name="encaderant" value={{p.Encadrant}}></td>
             <td><input type= "text" name="promoteur" value={{p.Promoteur}}></td>
             <td><input type= "text" name="stage" value={{p.Stage}}></td>

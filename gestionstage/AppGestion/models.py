@@ -1,6 +1,8 @@
 from enum import auto
 from django.db import models
 import datetime
+from django.db.models.signals import m2m_changed
+from django.core.exceptions import ValidationError
 
 NIV_ETUDE_STAGE=(
 (1,"CP1"),
@@ -14,7 +16,10 @@ NIV_ETUDE=(
 (4,"CS2"),
 (5,"CS3")
 )
-
+TYPE_ORGANISME=(
+(1,"partenaire"),
+(0,"non partenaire")
+)
 
 
 class Stagiaire (models.Model):
@@ -38,7 +43,7 @@ class Encadrant (models.Model):
 
 class Organisme (models.Model):
     NomOrganisme= models.CharField(max_length=40,primary_key=True)
-    typeOr=models.CharField(max_length=20,null=True)
+    typeOr=models.IntegerField(choices=TYPE_ORGANISME)
     def __str__(self):
         return self.NomOrganisme 
 
@@ -62,6 +67,9 @@ class Stage (models.Model):
     Organisme = models.ForeignKey("Organisme",on_delete=models.CASCADE)
     def __str__(self):
         return self.NomStage
+    class Meta:
+        ordering = ['NomStage']
+
 
 
 class Fiche_Stage (models.Model):
@@ -73,8 +81,7 @@ class Fiche_Stage (models.Model):
     Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
     Sujet = models.TextField(max_length=60,unique=True,null=True,blank=True)
-    Groupe=models.IntegerField()
-
+    
     class Meta:
-        unique_together = (('Groupe','AnneeCourante'))
+        #unique_together = (('Groupe','AnneeCourante'))
 

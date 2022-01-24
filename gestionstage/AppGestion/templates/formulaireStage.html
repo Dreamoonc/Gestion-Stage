@@ -8,6 +8,7 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" href="#">
     <title>formulaire stage </title>
 </head>
 <body>
@@ -32,25 +33,92 @@
   </div>
       <div class="gg"  id="ajout-kk" >
         <h2> Formulaire de stage </h2>
-        <form  method="post">
+        <form  method="post" id="formFichStage" data-Etudiant-url="{%url 'ajax_load_Etudiant'%}" 
+         data-Promoteur-url="{%url 'ajax_load_Promoteur'%}" data-Stage-url="{%url 'ajax_load_Stage'%}">
             {% csrf_token %}
-            <div class="form"> 
+            
                {% for field in formFichStage%}
                   <div class="field ">
                     <label for="{{field.id_for_label}}" class="label">{{field.html_name}}</label>
                     {{field}}
                   </div>
                 {% endfor %}
-               </div>
             
            <input class="buttonform"  type="submit" value="Add" />
         </form>
       </div>
-      
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
 
-      <script>
-        
-      </script>
+  <script >
+    $("#id_NivEtude").change(function(){
+      const url =$('#formFichStage').attr("data-Etudiant-url");
+      const nivEtuId=$(this).val();
+      $.ajax({
+        url:url,
+        data:{
+          'NivEtude':nivEtuId
+        },
+        success:function(data){
+          console.log(data)
+          $("#select").html(data);
+        }
+      })
+    }
+    )
+    
+    $("#id_Organisme").change(function(){
+      const url =$('#formFichStage').attr("data-Stage-url");
+      const organisme=$(this).val();
+      console.log(organisme)
+      $.ajax({
+        url:url,
+        data:{
+          'Organisme':organisme
+        },
+        success:function(data){
+          console.log(data)
+          $("#id_Stage").html(data);
+        }
+      })
+    }
+    )
+   
+
+    $("#id_Organisme").change(function(){
+      const url =$('#formFichStage').attr("data-Promoteur-url");
+      const organisme=$(this).val();
+      console.log(organisme)
+      $.ajax({
+        url:url,
+        data:{
+          'Organisme':organisme
+        },
+        success:function(data){
+          console.log(data)
+          $("#id_Promoteur").html(data);
+        }
+      })
+    }
+    )
+
+  </script>
+  <script>
+  (function(){
+
+    var x=document.getElementById("select")
+    x.addEventListener("click",function(){
+      var total=0
+    for (var i = 0; i < x.options.length; i++) {
+      if(x.options[i].selected==true){
+        total=total+1
+      }}
+      if(total>3){
+        alert("Selectioner au maximum 3 etudiants, svp")
+        x.options[x.options.selectedIndex].selected=false
+      }
+       })
+    })() 
+  </script>
 
 </body>
 </html> 

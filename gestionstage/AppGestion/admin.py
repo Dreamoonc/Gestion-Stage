@@ -1,11 +1,5 @@
 from django.contrib import admin
-from .models import Stagiaire
-from .models import Encadrant
-from .models import Organisme
-from .models import Promoteur
-from .models import Stage
 from .models import *
-
 
 
 admin.site.register(Stagiaire)

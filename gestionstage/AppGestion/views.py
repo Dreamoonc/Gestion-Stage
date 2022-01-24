@@ -24,16 +24,17 @@ def stagiaire (request):
         formStagiaire=StagiaireForm
         
     return render(request,'stagiaire.html',{'stagiaire':stagiaires,'myFilter1':myFilter1,'formStagiaire':formStagiaire})
+
 def formulaireStage(request ):
     ficheStage= Fiche_Stage.objects.all()
     if request.method=="POST":
-        formficheStage =formFichStage(data=request.POST)
-        if formficheStage.is_valid():
-            formficheStage.save() 
+        formficheStages =formFichStage(data=request.POST)
+        if formficheStages.is_valid():
+            formficheStages.save() 
             return redirect("formulaireStage")
     else:
-        formficheStage=formFichStage
-    return render(request,'formulaireStage.html',{'fiche':ficheStage ,'formFichStage':formficheStage})
+        formficheStages=formFichStage
+    return render(request,'formulaireStage.html',{'fiche':ficheStage ,'formFichStage':formficheStages})
 
 def encadrant(request):
     encadrants=Encadrant.objects.all()
@@ -192,3 +193,21 @@ def delete_tableform(request,myid) :
     item.delete()
     messages.info(request,'item delete seccely ')
     return redirect(tableFormulaireStage)
+
+#AJAX
+
+def load_Etudiant(request):
+    NivEtude_id=request.GET.get('NivEtude')
+    Etudiants=Stagiaire.objects.filter(NivEtude=NivEtude_id)
+    return render(request,'chained_dropdowns/Etudiant_dropdown_list_options.html',{'Etudiants':Etudiants})
+
+
+def load_Promoteur(request):
+    Organisme_id=request.GET.get('Organisme')
+    Promoteurs=Promoteur.objects.filter(Organisme=Organisme_id)
+    return render(request,'chained_dropdowns/Promoteur_dropdown_list_options.html',{'Promoteurs':Promoteurs})
+
+def load_Stage(request):
+    Organisme_id=request.GET.get('Organisme')
+    Stages=Stage.objects.filter(Organisme=Organisme_id)
+    return render(request,'chained_dropdowns/Stage_dropdown_list_options.html',{'Stages':Stages})
