@@ -82,6 +82,6 @@ class Fiche_Stage (models.Model):
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
     Sujet = models.TextField(max_length=60,unique=True,null=True,blank=True)
     
-    class Meta:
-        #unique_together = (('Groupe','AnneeCourante'))
+    # class Meta:
+    #     #unique_together = (('Groupe','AnneeCourante'))
 
