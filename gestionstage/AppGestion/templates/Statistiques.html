@@ -1,0 +1,229 @@
+{% extends 'base.html' %} {% block title %}Statistiques{% endblock %} {% block content %}
+
+
+
+<body>
+
+
+    <li></li>
+
+    <li>
+
+    </li>
+
+
+    <li>
+
+    </li>
+    </li <center>
+
+
+    <h1>
+
+
+
+
+
+        <div class="row ">
+            <div class="col-md-18 my-18">
+                <div class="bg-white">
+                    <div class="contenue">
+                        <canvas id="myChart1" width="600" height="600"></canvas>
+                        <script>
+                            var labels1 = JSON.parse("{{labelss|escapejs}}");
+                            var ychart = JSON.parse("{{ychart|escapejs}}");
+                            var ctx = document.getElementById('myChart1').getContext('2d');
+                            var myChart1 = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: labels1,
+                                    datasets: [{
+                                        label: 'nb Pfe',
+                                        data: ychart,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </h1>
+
+
+    <h2>
+        <div class="row ">
+            <div class="col-md-18 my-18">
+                <div class="bg-white">
+
+                    <canvas id="myChart2" width="600" height="600"></canvas>
+                    <script>
+                        var nbStagiaire = JSON.parse("{{nbStagiaire|escapejs}}");
+                        var organismes2 = JSON.parse("{{organismes2|escapejs}}");
+
+                        const nbrStagiaires = nbStagiaire;
+
+                        const labels = organismes2;
+
+                        let merged = labels.map((label, i) => {
+                            return {
+
+                                "label": labels[i],
+                                "nbrStagiaires": nbrStagiaires[i],
+
+                            }
+                        });
+                        console.log(merged)
+                        const datasort = merged.sort(function(a, b) {
+                            return b.nbrStagiaires - a.nbrStagiaires
+                        });
+
+                        const borders = []
+                        const backgrounds = []
+                        const nbrStg = []
+                        const labelss = []
+                        for (i = 0; i < datasort.length; i++) {
+                            nbrStg.push(datasort[i].nbrStagiaires);
+                            labelss.push(datasort[i].label);
+                        }
+
+                        //setup
+
+                        const data = {
+                            labels: labelss,
+                            datasets: [{
+                                label: 'nb Stagiaires',
+                                data: nbrStg,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.8)',
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 206, 86, 0.8)',
+                                    'rgba(75, 192, 192, 0.8)',
+                                    'rgba(153, 102, 255, 0.8)',
+                                    'rgba(255, 159, 64, 0.8)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        };
+
+                        const config = {
+                            type: 'bar',
+                            data,
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        };
+
+                        const myChart2 = new Chart(document.getElementById('myChart2'), config);
+                    </script>
+
+                </div>
+            </div>
+    </h2>
+
+
+    <h3>
+
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Annee Affichee
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {%for an in annees %}
+                <a class="dropdown-item" href="{%url 'pfe_chart' an %}">{{an}}</a>{% endfor %}
+            </div>
+        </div>
+
+    </h3>
+
+    <h4>
+        <div class="row ">
+            <div class="col-md-18 my-18">
+                <div class="bg-white">
+
+                    <canvas id="myChart3" width="600" height="600"></canvas>
+                    <script>
+                        var annees = JSON.parse("{{annees|escapejs}}");
+                        var nbOrganismes = JSON.parse("{{nbOrganismes|escapejs}}");
+                        var ctx = document.getElementById('myChart3').getContext('2d');
+                        var myChart3 = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: annees,
+                                datasets: [{
+                                    label: 'nb Org',
+                                    data: nbOrganismes,
+
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+
+                </div>
+            </div>
+    </h4>
+
+    </center>
+</body>
+{%endblock content%}

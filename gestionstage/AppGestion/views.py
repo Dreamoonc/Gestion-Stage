@@ -6,6 +6,12 @@ from .filters import *
 from django.db.models import F
 from django.core.paginator import Paginator 
 from AppGestion.form import *
+from django.db.models import Count
+from django.http import JsonResponse
+from json import dumps
+from itertools import count
+
+
 # Create your views here.
 def stagiaire (request):
     stagiaires=Stagiaire.objects.all()
@@ -211,3 +217,73 @@ def load_Stage(request):
     Organisme_id=request.GET.get('Organisme')
     Stages=Stage.objects.filter(Organisme=Organisme_id)
     return render(request,'chained_dropdowns/Stage_dropdown_list_options.html',{'Stages':Stages})
+
+    
+
+def Statistiques (request):
+    return get_Chart(request,2022,{})
+
+
+
+def get_Chart (request,year): 
+    years=Fiche_Stage.objects.all().values('AnneeCourante')
+    labelss=[]
+    ychart=[]
+    fiches=Fiche_Stage.objects.filter(AnneeCourante=year,NivEtude=5)
+    fiches_groupees=fiches.values('Organisme').annotate(countorg=Count('Organisme')).order_by()
+    nbStagiaire=[]
+    organismes2=[]
+    ficheannee=Fiche_Stage.objects.filter(AnneeCourante=year)
+    Organismes=ficheannee.values('Organisme').annotate(countorg=Count('Organisme')).order_by()
+    Organismesprt=Organismes.filter(Organisme__typeOr=1)
+    annees=[]
+    nbOrganismes=[]
+    yearss=Fiche_Stage.objects.filter(NivEtude=5)
+    years=yearss.values('AnneeCourante').annotate(countannee=Count('AnneeCourante')).order_by()
+   
+    for fg in fiches_groupees:
+        organom=fg['Organisme']
+        labelss.append(organom)
+        ychart.append(fg['countorg'])
+    
+
+    for org in Organismesprt:
+     nb=0
+     ficheorg=ficheannee.filter(Organisme=org['Organisme'])
+     
+     for fic in ficheorg:
+         i=fic.Etudiant.all()
+         nb=nb + i.count()
+     nbStagiaire.append(nb)
+     organismes2.append(org['Organisme'])
+
+
+    for annee in years:
+        annees.append(annee['AnneeCourante'])
+        nbOrganismes.append(nbOrgAnnee(annee['AnneeCourante']))
+
+    
+    dataJSON1 = dumps(labelss)
+    dataJSON2 =dumps(ychart)
+    dataJSON3 = dumps(nbStagiaire)
+    dataJSON4 = dumps(organismes2)
+    dataJSON5 = dumps(annees)
+    dataJSON6 =dumps(nbOrganismes)
+
+
+    return render(request,'Statistiques.html',{'labelss':dataJSON1,'ychart':dataJSON2,'nbStagiaire':dataJSON3,'organismes2':dataJSON4,'annees':dataJSON5,'nbOrganismes':dataJSON6,'years': years,'annees':annees})
+
+
+def nbOrgAnnee (year):
+    fiches=Fiche_Stage.objects.filter(AnneeCourante=year,NivEtude=5)
+    fiches_groupees=fiches.values('Organisme').annotate(countorg=Count('Organisme')).order_by()
+    nborg=fiches_groupees.count()
+
+    return nborg
+
+
+
+
+
+
+
