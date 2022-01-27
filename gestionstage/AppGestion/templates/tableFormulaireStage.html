@@ -34,7 +34,7 @@
         </div>
       </li>
       <li ><a  href="{% url 'formulaireStage'%}">Formulaire</a></li>
-      <li ><a  href="#">Statistique</a> </li>
+      <li><a href="{% url 'Statistiques'%}">Statistiques</a> </li>
     </ul>
   </div>
   
@@ -64,23 +64,27 @@
           <th>promoteur</th>
           <th>stage</th>
           <th>sujet</th>
+          <th>groupe</th>
           <th>Remove</th>
           <th>Update</th>
         </tr>
       </thead>
         {% for p in form %}
+        {% for l in p.Etudiant.all%}
         <tr>
         <form method ="POST" action="/Update_table/{{p.matricule}}/"> 
             {% csrf_token %}
-            <td><input type= "text" name="etudiant" value={{p.Etudiant}} >  </td>
-            <td><input type= "text" name="encaderant" value={{p.Encadrant}}></td>
-            <td><input type= "text" name="promoteur" value={{p.Promoteur}}></td>
-            <td><input type= "text" name="stage" value={{p.Stage}}></td>
-            <td><input type= "text" name="sujet" value={{p.Sujet}}></td>
-         <td> <a href="{% url 'delete_tableform' p.Etudiant %}"  class="btn btn-danger"> delete </a> </td>
+            <td><textarea class="table_input" name="etudiant" >{{l}}</textarea> </td>
+            <td><textarea class="table_input" name="encaderant" >{{p.Encadrant}}</textarea></td>
+            <td><textarea class="table_input" name="promoteur" >{{p.Promoteur}}</textarea></td>
+            <td><textarea class="table_input" name="stage" >{{p.Stage}}</textarea></td>
+            <td><textarea class="table_input" name="sujet" >{{p.Sujet}}</textarea></td>
+            <td>{{p.id}}</td>
+         <td> <a href="{% url 'delete_tableform' p.id %}"  class="btn btn-danger"> delete </a> </td>
          <td> <input type="submit" value="Update" class="btn btn-warning"></td>
         </form>
       </tr>
+      {% endfor %}
         {% endfor %}
       </table>
       <div class="pagination">

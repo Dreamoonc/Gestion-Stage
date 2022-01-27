@@ -64,11 +64,11 @@ class formFichStage (ModelForm):
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
             'Sujet':Textarea(attrs={'class': 'input' ,'style':'height:60px'})
         }
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        self.fields['Etudiant'].queryset=Stagiaire.objects.none()
-        self.fields['Stage'].queryset=Stage.objects.none()
-        self.fields['Promoteur'].queryset=Promoteur.objects.none()
+    # def __init__(self,*args,**kwargs):
+    #     super().__init__(*args,**kwargs)
+    #     self.fields['Etudiant'].queryset=Stagiaire.objects.none()
+    #     self.fields['Stage'].queryset=Stage.objects.none()
+    #     self.fields['Promoteur'].queryset=Promoteur.objects.none()
 
         # if 'NivEtude' in self.data:
         #     try:

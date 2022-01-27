@@ -73,15 +73,15 @@ class Stage (models.Model):
 
 
 class Fiche_Stage (models.Model):
-    Organisme=models.ForeignKey("Organisme",on_delete=models.CASCADE)
-    Stage=models.ForeignKey("Stage",on_delete=models.CASCADE)
     NivEtude =models.IntegerField(choices=NIV_ETUDE_STAGE)
     Etudiant=models.ManyToManyField(Stagiaire)
+    Organisme=models.ForeignKey("Organisme",on_delete=models.CASCADE)
+    Stage=models.ForeignKey("Stage",on_delete=models.CASCADE)
     Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE)
     Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
     Sujet = models.TextField(max_length=60,unique=True,null=True,blank=True)
-    
-    # class Meta:
-    #     #unique_together = (('Groupe','AnneeCourante'))
-
+    def __str__(self):
+        return self.id
+    class Meta:
+        ordering = ['id']

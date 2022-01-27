@@ -31,16 +31,19 @@ def stagiaire (request):
         
     return render(request,'stagiaire.html',{'stagiaire':stagiaires,'myFilter1':myFilter1,'formStagiaire':formStagiaire})
 
-def formulaireStage(request ):
+
+
+def formulaireStage(request):
     ficheStage= Fiche_Stage.objects.all()
     if request.method=="POST":
-        formficheStages =formFichStage(data=request.POST)
-        if formficheStages.is_valid():
-            formficheStages.save() 
+        formficheStage =formFichStage(data=request.POST)
+        if formficheStage.is_valid():
+            formficheStage.save()   
             return redirect("formulaireStage")
     else:
-        formficheStages=formFichStage
-    return render(request,'formulaireStage.html',{'fiche':ficheStage ,'formFichStage':formficheStages})
+        formficheStage=formFichStage
+
+    return render(request,'formulaireStage.html',{'fiche':ficheStage ,'formficheStage':formficheStage})
 
 def encadrant(request):
     encadrants=Encadrant.objects.all()
@@ -106,8 +109,18 @@ def stage(request):
             return redirect("stage")  
     else:
         formStage=StageForm
-
     return render(request,'stage.html',{'stage':stages,'organismes':organismes,'sta':sta,'formStage':formStage})
+
+
+def tableFormulaireStage (request):
+    tab=Fiche_Stage.objects.all()
+    myFilter1 =Fiche_StageFilter(request.GET, queryset=tab)
+    tab=myFilter1.qs
+    paginator= Paginator(tab,3)
+    page_number=request.GET.get('page')
+    tab=paginator.get_page(page_number)
+    return render(request,'tableFormulaireStage.html',{'form':tab,'myFilter1':myFilter1})
+    
 
 def login(request):
     return render(request,'login.html')
@@ -185,15 +198,8 @@ def update_stage (request,myid) :
         form.save()
         messages.success(request,"Record Updated Successfully!!")
         return redirect(stage)
-def tableFormulaireStage (request):
-    tab=Fiche_Stage.objects.all()
-    myFilter1 =Fiche_StageFilter(request.GET, queryset=tab)
-    tab=myFilter1.qs
-    paginator= Paginator(tab,5)
-    page_number=request.GET.get('page')
-    tab=paginator.get_page(page_number)
-    return render(request,'tableFormulaireStage.html',{'form':tab,'myFilter1':myFilter1})
-    
+
+
 def delete_tableform(request,myid) :
     item = Fiche_Stage.objects.get(id =myid)
     item.delete()
@@ -217,6 +223,11 @@ def load_Stage(request):
     Organisme_id=request.GET.get('Organisme')
     Stages=Stage.objects.filter(Organisme=Organisme_id)
     return render(request,'chained_dropdowns/Stage_dropdown_list_options.html',{'Stages':Stages})
+
+def load_StageNiv(request):
+    NivEtude_id=request.GET.get('NivEtude')
+    Stages=Stage.objects.filter(NivEtude=NivEtude_id)
+    return render(request,'chained_dropdowns/StageNiv_dropdown_list_options.html',{'Stages':Stages})
 
     
 
