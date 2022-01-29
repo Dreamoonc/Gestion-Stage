@@ -1,8 +1,92 @@
 {% extends 'base.html' %} {% block title %}Statistiques{% endblock %} {% block content %}
 
+<script>
+    var nbStagiaire = JSON.parse("{{nbStagiaire|escapejs}}");
+    var organismes2 = JSON.parse("{{organismes2|escapejs}}");
+
+    const nbrStagiaires = nbStagiaire;
+
+    const labels = organismes2;
+
+    let merged = labels.map((label, i) => {
+        return {
+
+            "label": labels[i],
+            "nbrStagiaires": nbrStagiaires[i],
+
+        }
+    });
+    console.log(merged)
+    const datasort = merged.sort(function(a, b) {
+        return b.nbrStagiaires - a.nbrStagiaires
+    });
 
 
-<body>
+    const nbrStg = []
+    const labelss = []
+    for (i = 0; i < datasort.length; i++) {
+        nbrStg.push(datasort[i].nbrStagiaires);
+        labelss.push(datasort[i].label);
+    }
+
+
+    // var mytable = '<table>' + '<thead>' + '<tr>' + '<th>Position</th>' + '<th>Organisme</th>' + '<th>Nombre de Stagiaires</th>' + '</tr>' + '</thead>' + '</table>'
+
+
+    // comsole.log(mytable)
+
+    function addCell(tr, val) {
+        var td = document.createElement('td');
+
+        td.innerHTML = val;
+
+        tr.appendChild(td)
+    }
+
+    function addth(thead, val) {
+        var th = document.createElement('th');
+        th.innerHTML = val;
+        thead.appendChild(th)
+    }
+
+    function addRow2(tbl, val_1, val_2, val_3) {
+        var tr = document.createElement('tr');
+        addth(tr, val_1)
+        addth(tr, val_2)
+        addth(tr, val_3)
+        tbl.appendChild(tr)
+
+    }
+
+    function addRow(tbl, val_1, val_2, val_3) {
+        var tr = document.createElement('tr');
+
+        addCell(tr, val_1);
+        addCell(tr, val_2);
+        addCell(tr, val_3);
+
+        tbl.appendChild(tr)
+    }
+
+    function addheader(tbl, val_1, val_2, val_3) {
+        var thead = document.createElement('thead')
+        addRow2(thead, val_1, val_2, val_3)
+        tbl.appendChild(thead)
+
+    }
+
+    function main() {
+        tbl = document.getElementById('tbl');
+
+        addheader(tbl, 'Position', 'Organisme', 'NbrStagiaires')
+        for (i = 0; i < datasort.length; i++) {
+            addRow(tbl, i + 1, datasort[i].label, datasort[i].nbrStagiaires)
+
+        }
+    }
+</script>
+
+<body onload='main()'>
 
 
     <li></li>
@@ -80,87 +164,26 @@
 
 
     <h2>
-        <div class="row ">
-            <div class="col-md-18 my-18">
-                <div class="bg-white">
+        <style>
+            tr:nth-child(2) {
+                background-color: gold;
+                color: white;
+            }
+            
+            tr:nth-child(3) {
+                background-color: silver;
+                color: white;
+            }
+            
+            tr:nth-child(4) {
+                background-color: rgb(193, 109, 36);
+                color: white;
+            }
+        </style>
 
-                    <canvas id="myChart2" width="600" height="600"></canvas>
-                    <script>
-                        var nbStagiaire = JSON.parse("{{nbStagiaire|escapejs}}");
-                        var organismes2 = JSON.parse("{{organismes2|escapejs}}");
-
-                        const nbrStagiaires = nbStagiaire;
-
-                        const labels = organismes2;
-
-                        let merged = labels.map((label, i) => {
-                            return {
-
-                                "label": labels[i],
-                                "nbrStagiaires": nbrStagiaires[i],
-
-                            }
-                        });
-                        console.log(merged)
-                        const datasort = merged.sort(function(a, b) {
-                            return b.nbrStagiaires - a.nbrStagiaires
-                        });
-
-                        const borders = []
-                        const backgrounds = []
-                        const nbrStg = []
-                        const labelss = []
-                        for (i = 0; i < datasort.length; i++) {
-                            nbrStg.push(datasort[i].nbrStagiaires);
-                            labelss.push(datasort[i].label);
-                        }
-
-                        //setup
-
-                        const data = {
-                            labels: labelss,
-                            datasets: [{
-                                label: 'nb Stagiaires',
-                                data: nbrStg,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.8)',
-                                    'rgba(54, 162, 235, 0.8)',
-                                    'rgba(255, 206, 86, 0.8)',
-                                    'rgba(75, 192, 192, 0.8)',
-                                    'rgba(153, 102, 255, 0.8)',
-                                    'rgba(255, 159, 64, 0.8)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        };
-
-                        const config = {
-                            type: 'bar',
-                            data,
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        };
-
-                        const myChart2 = new Chart(document.getElementById('myChart2'), config);
-                    </script>
-
-                </div>
-            </div>
+        <center>
+            <table id='tbl'></table>
+        </center>
     </h2>
 
 
@@ -224,6 +247,56 @@
             </div>
     </h4>
 
+
+
+    <h5>
+        <div class="row ">
+            <div class="col-md-18 my-18">
+                <div class="bg-white">
+
+                    <canvas id="myChart4" width="600" height="600"></canvas>
+                    <script>
+                        var nbrTypes = JSON.parse("{{nbrtypes|escapejs}}");
+                        var typestage = JSON.parse("{{typestage|escapejs}}");
+                        var ctx = document.getElementById('myChart4').getContext('2d');
+                        var myChart4 = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: typestage,
+                                datasets: [{
+                                    label: 'nombre de stages',
+                                    data: nbrTypes,
+
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+
+                        });
+                    </script>
+
+                </div>
+            </div>
+
+
+    </h5>
     </center>
+
+
 </body>
 {%endblock content%}

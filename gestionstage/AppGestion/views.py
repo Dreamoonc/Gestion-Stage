@@ -142,19 +142,19 @@ def delete_organisme (request,myid) :
     item = Organisme.objects.get(NomOrganisme =myid)
     item.delete()
     messages.info(request,'item delete seccely ')
-    return redirect(stagiaire)
+    return redirect(organisme)
 
 def delete_promoteur (request,myid) :
     item = Promoteur.objects.get(id =myid)
     item.delete()
     messages.info(request,'item delete seccely ')
-    return redirect(stagiaire)
+    return redirect(promoteur)
 
 def delete_stage (request,myid) :
     item = Stage.objects.get(id =myid)
     item.delete()
     messages.info(request,'item delete seccely ')
-    return redirect(stagiaire)
+    return redirect(stage)
     
 def update_stagiaire (request,myid) :
     itemup = Stagiaire.objects.get(matricule =myid)
@@ -206,8 +206,6 @@ def delete_tableform(request,myid) :
     messages.info(request,'item delete seccely ')
     return redirect(tableFormulaireStage)
 
-#AJAX
-
 def load_Etudiant(request):
     NivEtude_id=request.GET.get('NivEtude')
     Etudiants=Stagiaire.objects.filter(NivEtude=NivEtude_id)
@@ -251,7 +249,9 @@ def get_Chart (request,year):
     nbOrganismes=[]
     yearss=Fiche_Stage.objects.filter(NivEtude=5)
     years=yearss.values('AnneeCourante').annotate(countannee=Count('AnneeCourante')).order_by()
-   
+    types=Fiche_Stage.objects.filter(AnneeCourante=year).values('Stage__NivEtude').annotate(countStage=Count('Stage')).order_by()
+    nbrtypes=[]
+    typestage=[]
     for fg in fiches_groupees:
         organom=fg['Organisme']
         labelss.append(organom)
@@ -273,16 +273,29 @@ def get_Chart (request,year):
         annees.append(annee['AnneeCourante'])
         nbOrganismes.append(nbOrgAnnee(annee['AnneeCourante']))
 
-    
+    for t in types:
+        nbrtypes.append(t['countStage'])
+        if t['Stage__NivEtude'] == 1 :
+            typestage.append('CP1')
+
+        if t['Stage__NivEtude'] == 3 :
+            typestage.append('CS1')
+
+        if t['Stage__NivEtude'] == 5 :
+            typestage.append('PFE')
+
+        
+
     dataJSON1 = dumps(labelss)
     dataJSON2 =dumps(ychart)
     dataJSON3 = dumps(nbStagiaire)
     dataJSON4 = dumps(organismes2)
     dataJSON5 = dumps(annees)
     dataJSON6 =dumps(nbOrganismes)
+    dataJSON7 =dumps(nbrtypes)
+    dataJSON8 =dumps(typestage)
 
-
-    return render(request,'Statistiques.html',{'labelss':dataJSON1,'ychart':dataJSON2,'nbStagiaire':dataJSON3,'organismes2':dataJSON4,'annees':dataJSON5,'nbOrganismes':dataJSON6,'years': years,'annees':annees})
+    return render(request,'Statistiques.html',{'labelss':dataJSON1,'ychart':dataJSON2,'nbStagiaire':dataJSON3,'organismes2':dataJSON4,'annees':dataJSON5,'nbOrganismes':dataJSON6,'nbrtypes':dataJSON7,'typestage':dataJSON8,'years': years,'annees':annees})
 
 
 def nbOrgAnnee (year):
