@@ -63,35 +63,4 @@ class formFichStage (ModelForm):
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
             'Sujet':Textarea(attrs={'class': 'input' ,'style':'height:60px', 'id':'sujet'})
         }
-    # def __init__(self, *args, **kwargs): 
-    #     super().__init__(*args, **kwargs)                       
-    #     self.fields['Sujet'].disabled = True
-    #     self.fields['Promoteur'].disabled = True
-    #     self.fields['Encadrant'].disabled = True
-    # def __init__(self,*args,**kwargs):
-    #     super().__init__(*args,**kwargs)
-    #     self.fields['Etudiant'].queryset=Stagiaire.objects.none()
-    #     self.fields['Stage'].queryset=Stage.objects.none()
-    #     self.fields['Promoteur'].queryset=Promoteur.objects.none()
-
-        # if 'NivEtude' in self.data:
-        #     try:
-        #         NivEtude_id=int(self.data.get('NivEtude'))
-        #         self.fields['Etudiant'].queryset=Stagiaire.objects.filter(NivEtude=NivEtude_id)
-        #     except(ValueError,TypeError):
-        #         pass
-        # elif self.instance.pk:
-        #     self.fields['Etudiant'].queryset=self.instance.NivEtude.Etudiant_set
-        
-
-
-        # if 'Organisme' in self.data:
-        #     try:
-        #         Organisme_id=int(self.data.get('Organisme'))
-        #         self.fields['Promoteur'].queryset=Promoteur.objects.filter(Organisme=Organisme_id)
-        #         self.fields['Stage'].queryset=Promoteur.objects.filter(Organisme=Organisme_id)
-        #     except(ValueError,TypeError):
-        #         pass
-        # elif self.instance.pk:
-        #     self.fields['Promoteur'].queryset=self.instance.Organisme.Promoteur_set
-        #     self.fields['Stage'].queryset=self.instance.Organisme.Stage_set
+    
