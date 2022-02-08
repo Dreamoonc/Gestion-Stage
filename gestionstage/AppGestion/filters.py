@@ -36,3 +36,10 @@ class OrganismeFilter(django_filters.FilterSet):
     class  Meta :
        model = Organisme
        fields = '__all__'
+
+class Fiche_StageFilter(django_filters.FilterSet):
+  
+    class  Meta :
+       model = Fiche_Stage
+       fields = '__all__'
+       exclude =['AnneeCourante','Sujet','Promoteur','Stage','Etudiant']

@@ -1,5 +1,7 @@
-from django.forms import ModelForm ,NumberInput,TextInput,Select
+from django.forms import *
 from .models import *
+
+
 
 class StagiaireForm (ModelForm):
     class Meta:
@@ -52,15 +54,13 @@ class formFichStage (ModelForm):
         fields="__all__"
         exclude =['AnneeCourante']
         widgets={
-            'Groupe':NumberInput(attrs={'class': 'input'}),
             'Organisme':Select(attrs={'class': 'input'}),
             'Stage':Select(attrs={'class': 'input'}),
-            'NivEtude':Select(attrs={'class': 'input'}),
-            'Etudiant1':Select(attrs={'class': 'input'}),
-            'Etudiant2':Select(attrs={'class': 'input'}),
-            'Etudiant3':Select(attrs={'class': 'input'}),
-            'Encadrant':Select(attrs={'class': 'input'}),
-            'Promoteur':Select(attrs={'class': 'input'}),
+            'NivEtude':Select(attrs={'class': 'input' , 'id':'nivEtude'}),
+            'Encadrant':Select(attrs={'class': 'input', 'id':'encadrant'}),
+            'Promoteur':Select(attrs={'class': 'input', 'id':'promoteur'}),
+            'Etudiant':SelectMultiple(attrs={'class':'input','style':'height:100px' , 'id':'select'}),
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
-            'Sujet':TextInput(attrs={'class': 'input'})
+            'Sujet':Textarea(attrs={'class': 'input' ,'style':'height:60px', 'id':'sujet'})
         }
+    

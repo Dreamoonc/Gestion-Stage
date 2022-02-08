@@ -22,13 +22,14 @@
               <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
               <li><a href="{% url 'encadrant'%}">encadrant</a></li>
               <li><a href="{% url 'organisme'%}">organisme</a></li>
-            <li><a href="{% url 'promoteur'%}">promoteur</a></li>
+              <li><a href="{% url 'promoteur'%}">promoteur</a></li>
               <li><a href="{% url 'stage'%}">stage</a></li>
+              <li><a href="{% url 'tableFormulaireStage'%}">fiche_stage </a></li>
             </ul>
           </div>
         </li>
         <li ><a  href="{% url 'formulaireStage'%}">formulaire</a></li>
-        <li ><a  href="#">statistique</a> </li>
+        <li><a href="{% url 'Statistiques'%}">Statistiques</a> </li>
       </ul>
     </div>
     </header>
@@ -70,7 +71,7 @@
             <tr>
               <form method ="POST" action="/Update_Encadrant/{{p.id}}/"> 
                   {% csrf_token %}
-               <td><text  class="table_input" name="NomPrenomEn">{{p.NomPrenomEn}}</text></td>
+               <td><textarea  class="table_input" name="NomPrenomEn" rows="2">{{p.NomPrenomEn}}</textarea></td>
                <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn btn-danger"> delete </a> </td>
                <td> <input type="submit" value="Update" class="btn btn-warning"> </td>
               </form>

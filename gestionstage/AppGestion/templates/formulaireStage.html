@@ -8,6 +8,7 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" href="#">
     <title>formulaire stage </title>
 </head>
 <body>
@@ -22,27 +23,151 @@
             <li><a href="{% url 'organisme'%}">organisme</a></li>
             <li><a href="{% url 'promoteur'%}">promoteur</a></li>
             <li><a href="{% url 'stage'%}">stage</a></li>
+            <li><a href="{% url 'tableFormulaireStage'%}">fiche_stage </a></li>
           </ul>
         </div>
       </li>
       <li ><a  href="{% url 'formulaireStage'%}">formulaire</a></li>
-      <li ><a  href="#">statistique</a> </li>
+      <li><a href="{% url 'Statistiques'%}">Statistiques</a> </li>
     </ul>
   </div>
       <div class="gg"  id="ajout-kk" >
-        <form  method="post">
+        <h2> Formulaire de stage </h2>
+        <form  method="post" id="formFichStage" data-Etudiant-url="{%url 'ajax_load_Etudiant'%}" 
+         data-Promoteur-url="{%url 'ajax_load_Promoteur'%}" data-Stage-url="{%url 'ajax_load_Stage'%}"
+         data-Stage-url="{%url 'ajax_load_StageNiv'%}">
             {% csrf_token %}
-            <div class="form"> 
-               {% for field in formFichStage%}
-                  <div class="field ">
+            
+               {% for field in formficheStage%}
+                  <div class="field">
                     <label for="{{field.id_for_label}}" class="label">{{field.html_name}}</label>
                     {{field}}
                   </div>
                 {% endfor %}
-               </div>
-           <input class="button" type="submit" value="Add" />
+              
+           <input class="buttonform"  type="submit" value="Add" />
         </form>
       </div>
 
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
+
+  <script >
+    $("#nivEtude").change(function(){
+      const url =$('#formFichStage').attr("data-Etudiant-url");
+      const nivEtuId=$(this).val();
+      $.ajax({
+        url:url,
+        data:{
+          'NivEtude':nivEtuId
+        },
+        success:function(data){
+          console.log(data)
+          $("#select").html(data);
+        }
+      })
+    }
+    )
+
+    $("#nivEtude").change(function(){
+      const url =$('#formFichStage').attr("data-StageNiv-url");
+      const nivEtuId=$(this).val();
+      $.ajax({
+        url:url,
+        data:{
+          'NivEtude':nivEtuId
+        },
+        success:function(data){
+          console.log(data)
+          $("#id_Stage").html(data);
+        }
+      })
+    }
+    )
+    
+    $("#id_Organisme").change(function(){
+      const url =$('#formFichStage').attr("data-Stage-url");
+      const organisme=$(this).val();
+      console.log(organisme)
+      $.ajax({
+        url:url,
+        data:{
+          'Organisme':organisme
+        },
+        success:function(data){
+          console.log(data)
+          $("#id_Stage").html(data);
+        }
+      })
+    }
+    )
+   
+
+    $("#id_Organisme").change(function(){
+      const url =$('#formFichStage').attr("data-Promoteur-url");
+      const organisme=$(this).val();
+      console.log(organisme)
+      $.ajax({
+        url:url,
+        data:{
+          'Organisme':organisme
+        },
+        success:function(data){
+          console.log(data)
+          $("#promoteur").html(data);
+        }
+      })
+    }
+    )
+
+  </script>
+  <script>
+    
+    // fonction pour la limitation des choix des etudiants  en fonction de leur annee d'etude 
+      // fonction pour la restriction des fiels par a port au niv d etude
+  (function(){
+    var x=document.getElementById("select")
+    var sujet=document.getElementById("sujet")
+    var promoteur=document.getElementById("promoteur")
+    var encadrant=document.getElementById("encadrant")
+    var nivEtude=document.getElementById("nivEtude")
+    nivEtude.addEventListener("click",function(){
+      if(nivEtude.value==1){
+        sujet.disabled =true
+        promoteur.disabled=true
+        encadrant.disabled=true
+      }
+      if (nivEtude.value==3) {
+        sujet.disabled =true
+        promoteur.disabled=false
+        encadrant.disabled=false
+      }
+      if (nivEtude.value==5) {
+        sujet.disabled =false
+        promoteur.disabled=false
+        encadrant.disabled=false
+      }
+    })
+
+    x.addEventListener("click",function(){
+    var total=0
+    var max
+    if (nivEtude.value==1) {
+      max=2
+    } else {
+      max=4
+    }
+    for (var i = 0; i < x.options.length; i++) {
+      if(x.options[i].selected==true){
+        total=total+1
+      }}
+      if(total>max){
+        alert("Selectioner au maximum "+ max +" etudiants, svp")
+        x.options[x.options.selectedIndex].selected=false
+      }
+       })
+    })()
+  </script>
+
 </body>
-</html>
+</html> 

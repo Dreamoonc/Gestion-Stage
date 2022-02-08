@@ -84,7 +84,17 @@ body{
     border:0;
     margin-left: 10px;
 }
- 
+.buttonform{
+    background-color: #000;
+    color: #fff;
+    padding: 5px 30px;
+    border:0;
+    float: right;
+    margin-top: 20px;
+}
+.buttonform:hover{
+    background-color:#00c3d1;
+}
 .modal__close {
     position: absolute;
     text-decoration: none;
@@ -197,25 +207,30 @@ td{
     padding: 10px;
 }
 .gg {
-    padding-top: 100px;
+    padding-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
+    margin-bottom: 100px;
 
 }
 
 .input{
     border: #e6e6e6 2px solid;
-    width: 400px;
+    margin-bottom: 20px;
+    width: 600px;
     height: 35px;
     border-radius: 5px ;
     display: block;
 }
+.input.hide{
+    display: none;
+}
 .table_input{
     border: none;
     background:none;
-    width: 100px;
+    width: 120px;
 }
 
 .table_input:focus{
