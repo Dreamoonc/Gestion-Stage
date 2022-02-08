@@ -39,7 +39,7 @@
             {% csrf_token %}
             
                {% for field in formficheStage%}
-                  <div class="field ">
+                  <div class="field">
                     <label for="{{field.id_for_label}}" class="label">{{field.html_name}}</label>
                     {{field}}
                   </div>
@@ -122,21 +122,51 @@
 
   </script>
   <script>
+    
+    // fonction pour la limitation des choix des etudiants  en fonction de leur annee d'etude 
+      // fonction pour la restriction des fiels par a port au niv d etude
   (function(){
-
     var x=document.getElementById("select")
+    var sujet=document.getElementById("sujet")
+    var promoteur=document.getElementById("promoteur")
+    var encadrant=document.getElementById("encadrant")
+    var nivEtude=document.getElementById("nivEtude")
+    nivEtude.addEventListener("click",function(){
+      if(nivEtude.value==1){
+        sujet.disabled =true
+        promoteur.disabled=true
+        encadrant.disabled=true
+      }
+      if (nivEtude.value==3) {
+        sujet.disabled =true
+        promoteur.disabled=false
+        encadrant.disabled=false
+      }
+      if (nivEtude.value==5) {
+        sujet.disabled =false
+        promoteur.disabled=false
+        encadrant.disabled=false
+      }
+    })
+
     x.addEventListener("click",function(){
-      var total=0
+    var total=0
+    var max
+    if (nivEtude.value==1) {
+      max=2
+    } else {
+      max=4
+    }
     for (var i = 0; i < x.options.length; i++) {
       if(x.options[i].selected==true){
         total=total+1
       }}
-      if(total>3){
-        alert("Selectioner au maximum 3 etudiants, svp")
+      if(total>max){
+        alert("Selectioner au maximum "+ max +" etudiants, svp")
         x.options[x.options.selectedIndex].selected=false
       }
        })
-    })() 
+    })()
   </script>
 
 </body>

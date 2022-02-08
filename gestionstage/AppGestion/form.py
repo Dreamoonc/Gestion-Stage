@@ -54,16 +54,20 @@ class formFichStage (ModelForm):
         fields="__all__"
         exclude =['AnneeCourante']
         widgets={
-            'Groupe':NumberInput(attrs={'class': 'input'}),
             'Organisme':Select(attrs={'class': 'input'}),
             'Stage':Select(attrs={'class': 'input'}),
-            'NivEtude':Select(attrs={'class': 'input'}),
-            'Encadrant':Select(attrs={'class': 'input'}),
-            'Promoteur':Select(attrs={'class': 'input'}),
+            'NivEtude':Select(attrs={'class': 'input' , 'id':'nivEtude'}),
+            'Encadrant':Select(attrs={'class': 'input', 'id':'encadrant'}),
+            'Promoteur':Select(attrs={'class': 'input', 'id':'promoteur'}),
             'Etudiant':SelectMultiple(attrs={'class':'input','style':'height:100px' , 'id':'select'}),
             'AnneeCourante':NumberInput(attrs={'class': 'input'}),
-            'Sujet':Textarea(attrs={'class': 'input' ,'style':'height:60px'})
+            'Sujet':Textarea(attrs={'class': 'input' ,'style':'height:60px', 'id':'sujet'})
         }
+    # def __init__(self, *args, **kwargs): 
+    #     super().__init__(*args, **kwargs)                       
+    #     self.fields['Sujet'].disabled = True
+    #     self.fields['Promoteur'].disabled = True
+    #     self.fields['Encadrant'].disabled = True
     # def __init__(self,*args,**kwargs):
     #     super().__init__(*args,**kwargs)
     #     self.fields['Etudiant'].queryset=Stagiaire.objects.none()
