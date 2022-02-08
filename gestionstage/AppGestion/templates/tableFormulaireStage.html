@@ -68,7 +68,6 @@
                         <th>promoteur</th>
                         <th>stage</th>
                         <th>sujet</th>
-                        <th>groupe</th>
                         <th>Remove</th>
                         <th>Update</th>
                     </tr>
@@ -77,13 +76,11 @@
                 <tr>
                     <form method="POST" action="/Update_table/{{p.matricule}}/">
                         {% csrf_token %}
-                        <td><textarea class="table_input" name="etudiant" rows="4" style="width: 250px;" readonly>{% for l in p.Etudiant.all%}  {{l}} 
-{% endfor %}</textarea> </td>
+                        <td><textarea class="table_input" name="etudiant" rows="4" style="width: 250px;" readonly>{% for l in p.Etudiant.all%}  {{l}} {% endfor %}</textarea> </td>
                         <td><textarea class="table_input" name="encaderant" rows="3" style="width: 70px;">{{p.Encadrant}}</textarea></td>
                         <td><textarea class="table_input" name="promoteur" rows="3" style="width: 70px;">{{p.Promoteur}}</textarea></td>
                         <td><textarea class="table_input" name="stage" rows="3" style="width: 70px;">{{p.Stage}}</textarea></td>
                         <td><textarea class="table_input" name="sujet" rows="3" style="width: 200x;">{{p.Sujet}}</textarea></td>
-                        <td>{{p.id}}</td>
                         <td> <a href="{% url 'delete_tableform' p.id %}" class="btn btn-danger"> delete </a> </td>
                         <td> <input type="submit" value="Update" class="btn btn-warning"></td>
                     </form>

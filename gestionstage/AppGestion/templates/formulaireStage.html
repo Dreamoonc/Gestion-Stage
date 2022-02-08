@@ -53,7 +53,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
 
   <script >
-    $("#id_NivEtude").change(function(){
+    $("#nivEtude").change(function(){
       const url =$('#formFichStage').attr("data-Etudiant-url");
       const nivEtuId=$(this).val();
       $.ajax({
@@ -69,7 +69,7 @@
     }
     )
 
-    $("#id_NivEtude").change(function(){
+    $("#nivEtude").change(function(){
       const url =$('#formFichStage').attr("data-StageNiv-url");
       const nivEtuId=$(this).val();
       $.ajax({
@@ -114,7 +114,7 @@
         },
         success:function(data){
           console.log(data)
-          $("#id_Promoteur").html(data);
+          $("#promoteur").html(data);
         }
       })
     }
