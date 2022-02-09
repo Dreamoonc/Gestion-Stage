@@ -18,7 +18,7 @@ NIV_ETUDE=(
 )
 TYPE_ORGANISME=(
 (1,"partenaire"),
-(0,"non partenaire")
+(0,"nonPartenaire")
 )
 
 

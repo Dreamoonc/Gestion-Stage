@@ -9,7 +9,6 @@ class StagiaireForm (ModelForm):
         fields="__all__"
         widgets = {
             'matricule': NumberInput(attrs={'class': 'input' }),
-            'NomStagiaire': NumberInput(attrs={'class': 'input'}),
             'NomStagiaire': TextInput(attrs={'class': 'input'}),
             'PrenomStagiaire': TextInput(attrs={'class': 'input'}),
             'NivEtude':Select(attrs={'class': 'input'})
@@ -52,7 +51,6 @@ class formFichStage (ModelForm):
     class Meta :
         model=Fiche_Stage
         fields="__all__"
-        exclude =['AnneeCourante']
         widgets={
             'Organisme':Select(attrs={'class': 'input'}),
             'Stage':Select(attrs={'class': 'input'}),

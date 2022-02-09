@@ -16,7 +16,7 @@
     <div class="menu_bar">
       <h1 class="logo">gestion<span>Stage.</span></h1>
       <ul >
-        <li ><a  href="">tables<i class="fas fa-caret-down"></i></a>
+        <li ><a  href="" style="padding-left: 55px;">Tables &nbsp; <i class="fas fa-caret-down"></i></a>
           <div class="dropdown__menu">
             <ul>
               <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
@@ -72,8 +72,8 @@
               <form method ="POST" action="/Update_Encadrant/{{p.id}}/"> 
                   {% csrf_token %}
                <td><textarea  class="table_input" name="NomPrenomEn" rows="2">{{p.NomPrenomEn}}</textarea></td>
-               <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn btn-danger"> delete </a> </td>
-               <td> <input type="submit" value="Update" class="btn btn-warning"> </td>
+               <td> <a href="{% url 'delete_encaderant' p.id %}"  class="btn delete"> Delete </a> </td>
+               <td> <input type="submit" value="Update" class="btn update"> </td>
               </form>
               </tr>
             {% endfor %}
@@ -81,8 +81,8 @@
           <div class="pagination">
             <span class="step-links">
                 {% if encadrant.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ encadrant.previous_page_number }}">previous</a>
+                    <a href="?page=1" class="control">&laquo; first</a>
+                    <a href="?page={{ encadrant.previous_page_number }}" class="control">previous</a>
                 {% endif %}
         
                 <span class="current">
@@ -90,8 +90,8 @@
                 </span>
         
                 {% if encadrant.has_next %}
-                    <a href="?page={{ encadrant.next_page_number }}">next</a>
-                    <a href="?page={{ encadrant.paginator.num_pages }}">last &raquo;</a>
+                    <a href="?page={{ encadrant.next_page_number }}" class="control">next</a>
+                    <a href="?page={{ encadrant.paginator.num_pages }}" class="control">last &raquo;</a>
                 {% endif %}
             </span>
         </div>

@@ -23,7 +23,7 @@
             <div class="menu_bar">
                 <h1 class="logo">gestion<span>Stage.</span></h1>
                 <ul>
-                    <li><a href="">Tables <i class="fas fa-caret-down"></i></a>
+                    <li ><a  href="" style="padding-left: 55px;">Tables &nbsp; <i class="fas fa-caret-down"></i></a>
                         <div class="dropdown__menu">
                             <ul>
                                 <li><a href="{% url 'stagiaire'%}">stagiaire</a></li>
@@ -68,21 +68,23 @@
                         <th>promoteur</th>
                         <th>stage</th>
                         <th>sujet</th>
+                        <th>niveau</th>
+                        <th>Annee</th>
                         <th>Remove</th>
-                        <th>Update</th>
                     </tr>
                 </thead>
                 {% for p in form %}
                 <tr>
                     <form method="POST" action="/Update_table/{{p.matricule}}/">
                         {% csrf_token %}
-                        <td><textarea class="table_input" name="etudiant" rows="4" style="width: 250px;" readonly>{% for l in p.Etudiant.all%}  {{l}} {% endfor %}</textarea> </td>
-                        <td><textarea class="table_input" name="encaderant" rows="3" style="width: 70px;">{{p.Encadrant}}</textarea></td>
-                        <td><textarea class="table_input" name="promoteur" rows="3" style="width: 70px;">{{p.Promoteur}}</textarea></td>
-                        <td><textarea class="table_input" name="stage" rows="3" style="width: 70px;">{{p.Stage}}</textarea></td>
-                        <td><textarea class="table_input" name="sujet" rows="3" style="width: 200x;">{{p.Sujet}}</textarea></td>
-                        <td> <a href="{% url 'delete_tableform' p.id %}" class="btn btn-danger"> delete </a> </td>
-                        <td> <input type="submit" value="Update" class="btn btn-warning"></td>
+                        <td style="width: 300px;">{% for l in p.Etudiant.all%}  {{l}} <br> {% endfor %}</td>
+                        <td style="width: 70px;">{{p.Encadrant}}</td>
+                        <td style="width: 70px;">{{p.Promoteur}}</td>
+                        <td style="width: 70px;">{{p.Stage}}</td>
+                        <td style="width: 100px;">{{p.Sujet}}</td>
+                        <td style="width:30px;" >{{p.get_NivEtude_display}}</td>
+                        <td style="width: 100px;">{{p.AnneeCourante}}</td>
+                        <td> <a href="{% url 'delete_tableform' p.id %}" class="btn delete"> Delete </a> </td>
                     </form>
                 </tr>
                 {% endfor %}
@@ -90,15 +92,15 @@
             <div class="pagination">
                 <span class="step-links">
             {% if form.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ form.previous_page_number }}">previous</a>
+                <a href="?page=1" class="control">&laquo; first</a>
+                <a href="?page={{ form.previous_page_number }}" class="control">previous</a>
             {% endif %}
     
             <span class="current">
                 Page {{ form.number }} of {{ form.paginator.num_pages }}.
             </span> {% if form.has_next %}
-                <a href="?page={{ form.next_page_number }}">next</a>
-                <a href="?page={{ form.paginator.num_pages }}">last &raquo;</a> {% endif %}
+                <a href="?page={{ form.next_page_number }}" class="control">next</a>
+                <a href="?page={{ form.paginator.num_pages }}" class="control">last &raquo;</a> {% endif %}
                 </span>
             </div>
 
