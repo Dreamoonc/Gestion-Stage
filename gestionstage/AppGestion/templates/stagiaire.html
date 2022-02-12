@@ -90,13 +90,37 @@
                     <td><input class="table_input" type="text" name="matricule" value={{p.matricule}} readonly> </td>
                     <td><input class="table_input" type="text" name="NomStagiaire" value={{p.NomStagiaire}}></td>
                     <td><input class="table_input" type="text" name="PrenomStagiaire" value={{p.PrenomStagiaire}}></td>
-                    <td><input class="table_input" style="width:30px;" type="" name="NivEtude" value={{p.get_NivEtude_display}}></td>
+                    <td><input class="table_input" style="width:30px;" type="" name="NivEtude" value={{p.NivEtude}}></td>
                     <td> <a href="{% url 'delete_Stagaire' p.matricule %}" class="btn delete"> Delete </a> </td>
                     <td> <input type="submit" value="Update" class="btn update"> </td>
                 </form>
             </tr>
             {% endfor %}
         </table>
+
+
+ {% if messages %} {% for message in messages %}
+        <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %} {% endif %}
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+
+        <script>
+            setTimeout(function() {
+                if ($('#msg').length > 0) {
+                    $('#msg').remove();
+                }
+            }, 5000)
+        </script>
+
+
+
+
         <div class="pagination">
             <span class="step-links">
             {% if stagiaire.has_previous %}

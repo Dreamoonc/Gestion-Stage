@@ -10,171 +10,186 @@
 </head>
 <body onload='main()'>
 
-<div class="wrap">
-    <div class="row ">
-        <div class="col-md-18 my-18">
-            <div class="bg-white">
-                <div class="contenue">
-                    <canvas id="myChart1" width="300" height="300"></canvas>
-                    <script>
-                        var labels1 = JSON.parse("{{labelss|escapejs}}");
-                        var ychart = JSON.parse("{{ychart|escapejs}}");
-                        var ctx = document.getElementById('myChart1').getContext('2d');
-                        var myChart1 = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: labels1,
-                                datasets: [{
-                                    label: 'nb Pfe',
-                                    data: ychart,
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
+
+
+    <div class="statistique">
+        <div class="cont">
+            <div style="width: 100%;">
+                <div class="dropdown" >
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Annee Affichee
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {%for an in annees %}
+                        <a class="dropdown-item" href="{%url 'pfe_chart' an %}">{{an}}</a>{% endfor %}
+                    </div>
                 </div>
             </div>
+
+
+            <div>
+                <div class="row ">
+                    <div class="col-md-18 my-18">
+                        <div class="bg-white">
+                            <div class="contenue">
+                                <canvas id="myChart1" width="300" height="300"></canvas>
+                                <script>
+                                    var labels1 = JSON.parse("{{labelss|escapejs}}");
+                                    var ychart = JSON.parse("{{ychart|escapejs}}");
+                                    var ctx = document.getElementById('myChart1').getContext('2d');
+                                    var myChart1 = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: labels1,
+                                            datasets: [{
+                                                label: 'nb Pfe',
+                                                data: ychart,
+                                                backgroundColor: [
+                                                    'rgba(255, 99, 132, 1)',
+                                                    'rgba(54, 162, 235, 1)',
+                                                    'rgba(255, 206, 86, 1)',
+                                                    'rgba(75, 192, 192, 1)',
+                                                    'rgba(153, 102, 255, 1)',
+                                                    'rgba(255, 159, 64, 1)'
+                                                ],
+                                                borderColor: [
+                                                    'rgba(255, 99, 132, 1)',
+                                                    'rgba(54, 162, 235, 1)',
+                                                    'rgba(255, 206, 86, 1)',
+                                                    'rgba(75, 192, 192, 1)',
+                                                    'rgba(153, 102, 255, 1)',
+                                                    'rgba(255, 159, 64, 1)'
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                yAxes: [{
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }]
+                                            }
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+            </div> 
+
+             <p>Reparition des pfe par entreprises</p>
+            </div>
+
+        
+        
+    
+            <div > 
+                <div class="row ">
+                <div class="col-md-18 my-18">
+                    <div class="bg-white">
+        
+                        <canvas id="myChart4" width="400" height="300"></canvas>
+                        <script>
+                            var nbrTypes = JSON.parse("{{nbrtypes|escapejs}}");
+                            var typestage = JSON.parse("{{typestage|escapejs}}");
+                            var ctx = document.getElementById('myChart4').getContext('2d');
+                            var myChart4 = new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: typestage,
+                                    datasets: [{
+                                        label: 'nombre de stages',
+                                        data: nbrTypes,
+        
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+        
+                            });
+                        </script>
+        
+                    </div>
+                </div>
+            
+            </div>
+            <p>Nombre de stage par type de stage</p>
+            </div>
+        
+            <div style="height: 300px;">
+                <table id='tbl'></table>
+                <p style=" margin-top:-10px;">Classement des organismes <br> partenaire/ stagiaires retenus</p>
+            </div>
+
+        
         </div>
-    </div>
-
-        <table id='tbl'></table>
-
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Annee Affichee
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {%for an in annees %}
-            <a class="dropdown-item" href="{%url 'pfe_chart' an %}">{{an}}</a>{% endfor %}
-        </div>
-    </div>
-
-</h3>
-
-<h4>
-    <div class="row ">
-        <div class="col-md-18 my-18">
-            <div class="bg-white">
-
-                <canvas id="myChart3" width="300" height="300"></canvas>
-                <script>
-                    var annees = JSON.parse("{{annees|escapejs}}");
-                    var nbOrganismes = JSON.parse("{{nbOrganismes|escapejs}}");
-                    var ctx = document.getElementById('myChart3').getContext('2d');
-                    var myChart3 = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: annees,
-                            datasets: [{
-                                label: 'nb Org',
-                                data: nbOrganismes,
-
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
+    
+            <div class="cont"  style="justify-content: center;">
+            <div class="row ">
+                <div class="col-md-18 my-18">
+                    <div class="bg-white">
+        
+                        <canvas id="myChart3" width="1000px" height="300"></canvas>
+                        <script>
+                            var annees = JSON.parse("{{annees|escapejs}}");
+                            var nbOrganismes = JSON.parse("{{nbOrganismes|escapejs}}");
+                            var ctx = document.getElementById('myChart3').getContext('2d');
+                            var myChart3 = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: annees,
+                                    datasets: [{
+                                        label: 'nb Org',
+                                        data: nbOrganismes,
+        
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
                                     }
-                                }]
-                            }
-                        }
-                    });
-                </script>
-
+                                }
+                            });
+                        </script>
+        
+                    </div>
+                </div>
             </div>
-        </div>
-</h4>
-
-
-
-<h5>
-    <div class="row ">
-        <div class="col-md-18 my-18">
-            <div class="bg-white">
-
-                <canvas id="myChart4" width="300" height="300"></canvas>
-                <script>
-                    var nbrTypes = JSON.parse("{{nbrtypes|escapejs}}");
-                    var typestage = JSON.parse("{{typestage|escapejs}}");
-                    var ctx = document.getElementById('myChart4').getContext('2d');
-                    var myChart4 = new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                            labels: typestage,
-                            datasets: [{
-                                label: 'nombre de stages',
-                                data: nbrTypes,
-
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-
-                    });
-                </script>
-
+            <p>Taux d'evolution du nombre d'organisme ayant recus des stagiaires </p>
             </div>
-        </div>
+    </div>
+    
 
-
-</h5>
-</center>
-
-
-
-
-</div>
     <script>
         var nbStagiaire = JSON.parse("{{nbStagiaire|escapejs}}");
         var organismes2 = JSON.parse("{{organismes2|escapejs}}");
@@ -224,28 +239,28 @@
             thead.appendChild(th)
         }
     
-        function addRow2(tbl, val_1, val_2, val_3) {
+        function addRow2(tbl, val_1, val_2) {
             var tr = document.createElement('tr');
             addth(tr, val_1)
             addth(tr, val_2)
-            addth(tr, val_3)
+        
             tbl.appendChild(tr)
     
         }
     
-        function addRow(tbl, val_1, val_2, val_3) {
+        function addRow(tbl, val_1, val_2) {
             var tr = document.createElement('tr');
     
             addCell(tr, val_1);
             addCell(tr, val_2);
-            addCell(tr, val_3);
+            
     
             tbl.appendChild(tr)
         }
     
-        function addheader(tbl, val_1, val_2, val_3) {
+        function addheader(tbl, val_1, val_2) {
             var thead = document.createElement('thead')
-            addRow2(thead, val_1, val_2, val_3)
+            addRow2(thead, val_1, val_2)
             tbl.appendChild(thead)
     
         }
@@ -253,9 +268,9 @@
         function main() {
             tbl = document.getElementById('tbl');
     
-            addheader(tbl, 'Position', 'Organisme', 'NbrStagiaires')
+            addheader(tbl, 'Position', 'Organisme')
             for (i = 0; i < datasort.length; i++) {
-                addRow(tbl, i + 1, datasort[i].label, datasort[i].nbrStagiaires)
+                addRow(tbl, i + 1, datasort[i].label)
     
             }
         }

@@ -67,18 +67,18 @@ body{
     height: 35px;
     border-radius: 5px ;
     display: block;
+    outline: none;
+    transition: 0.3s;
 }
 
-.modal .button{
-    background-color: #000;
-    color: #fff;
-    padding: 5px 30px;
-    border:0;
-    float: right;
-    margin-right: 20px;
+.modal__content .input:focus{
+    border: #d4e2fd 2px solid;
+
 }
-.modal .button:hover{
-    background-color:#00c3d1;
+
+
+.button:hover{
+    background-color:#c4d6fa;
 }
 .button{
     background-color: #d4e2fd;
@@ -94,12 +94,11 @@ body{
     color: #fff;
     padding: 5px 30px;
     border:0;
+    border-radius: 5px;
     float: right;
     margin-top: 20px;
 }
-.buttonform:hover{
-    background-color:#00c3d1;
-}
+
 .modal__close {
     position: absolute;
     text-decoration: none;
@@ -171,9 +170,16 @@ td{
     color: #fec200;
 
 }
+.btn.update:hover{
+    background-color:#fff1c5;
+
+}
 .btn.delete{
     background-color: #fff3f4;
     color: #fb5360;
+}
+.btn.delete:hover{
+    background-color: #ffe8ea;
 }
 .contenue{
     display: flex;
@@ -252,6 +258,9 @@ td{
     border-radius: 5px ;
     display: block;
 }
+.input:focus{
+    border-color: #d4e2fd;
+}
 .input.hide{
     display: none;
 }
@@ -280,10 +289,12 @@ td{
     height: 35px;
     border-radius: 5px ;
     margin-right:20px;
+    outline: none;
 }
-.input_filter:active{
+.input_filter:focus{
     border-color: #d4e2fd;
 }
+
 ::-webkit-input-placeholder {
     text-align: center;
     color: rgb(192, 192, 192);

@@ -27,7 +27,7 @@ class OrganismeForm (ModelForm):
         fields="__all__"
         widgets={
             'NomOrganisme':TextInput(attrs={'class': 'input'}),
-            'typeOr':TextInput(attrs={'class': 'input'})
+            'typeOr':Select(attrs={'class': 'input'})
         }
 class PromoteurForm (ModelForm):
     class Meta:
@@ -51,6 +51,7 @@ class formFichStage (ModelForm):
     class Meta :
         model=Fiche_Stage
         fields="__all__"
+        # exclude=['AnneeCourante']
         widgets={
             'Organisme':Select(attrs={'class': 'input'}),
             'Stage':Select(attrs={'class': 'input'}),

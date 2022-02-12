@@ -1,24 +1,140 @@
-.wrap{
-    margin-top: 100px;
+body{
+    font-size: 0.9rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f6f7fb;
+}
+
+.menu_bar{
+    margin: 0;
+    height:60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    background-color:#0a142f;
+    position: fixed;
+    top :0;
+    
+}
+.logo{
+    color: rgb(255, 255, 255) ;
+    font-size: 28px;
+}
+.logo span {
+    color: #796dff;
+}
+.menu_bar ul {
+    list-style: none;
+    display: flex;
+    padding-top: 10px;
+}
+.menu_bar ul li {
+    padding: 10px 30px;
+}
+.menu_bar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+.menu_bar ul li a:hover{
+    color: #796dff;
+}
+.dropdown__menu{
+    display: none;
+}
+.menu_bar ul li:hover .dropdown__menu{
+    display: block;
+    position: absolute;
+  
+    background-color:#0a142f;
+}
+.dropdown__menu ul {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* .wrap{
     font-family: 'Ubuntu', sans-serif;
     display: flex;
     justify-content:space-evenly;
     align-items: center;
     flex-wrap: wrap;
     
+} */
+
+.statistique{
+    margin-top: 100px;
+}
+.cont{
+    padding: 50px;
+    margin-bottom:50px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height:100%;
+    background-color:#fff;
+    border-radius: 30px;
+
+}
+.dropdown{
+    margin-bottom: 30px;
+    float: right;
+}
+.drop{
+    
+    height: auto;
+    width: 100%;
+
+}
+
+
+
+table{
+    margin-top: 50px;
+    margin-bottom: 15px;
+    border-collapse: collapse;
+    border-radius: 10px;
+    /* box-shadow: 0 5px 10px rgb(221, 221, 221); */
+    background-color: #f6f7fb;
+    text-align: left;
+    overflow: hidden;    
+}
+
+
+
+thead{
+    height: 50px;
+    background-color: #f6f7fb;
+    color: #000;
+}
+
+th{
+    font-size: 14px;
+    padding: 5px 20px; 
+    letter-spacing: 0.1rem;
+    font-weight:bold;
+    color: rgb(155, 155, 155);
+}
+tr {
+    border-bottom: 1px solid rgb(223, 223, 223);
+  }
+td{
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 18px;
+
 }
 
 tr:nth-child(2) {
-    background-color: gold;
-    color: white;
+    color: #fec200;
 }
-
-tr:nth-child(3) {
-    background-color: silver;
-    color: white;
+tr:last-child  {
+    border-bottom: 0;
 }
-
-tr:nth-child(4) {
-    background-color: rgb(193, 109, 36);
-    color: white;
+p{
+    color:rgb(155, 155, 155) ;
 }

@@ -37,6 +37,7 @@ def formulaireStage(request):
     ficheStage= Fiche_Stage.objects.all()
     if request.method=="POST":
         formficheStage =formFichStage(data=request.POST)
+        print(formficheStage)
         if formficheStage.is_valid():
             formficheStage.save()   
             return redirect("formulaireStage")
@@ -129,31 +130,31 @@ def login(request):
 def delete_Stagaire (request,myid) :
     item = Stagiaire.objects.get(matricule =myid)
     item.delete()
-    messages.info(request,'item delete seccely ')
+    messages.info(request,'Stagiaire supprimé')
     return redirect(stagiaire)
 
 def delete_encaderant (request,myid) :
     item = Encadrant.objects.get(id =myid)
     item.delete()
-    messages.info(request,'item delete seccely ')
+    messages.info(request,'Encadrant supprimé')
     return redirect(encadrant)
 
 def delete_organisme (request,myid) :
     item = Organisme.objects.get(NomOrganisme =myid)
     item.delete()
-    messages.info(request,'item delete seccely ')
+    messages.info(request,'Organisme supprimé')
     return redirect(organisme)
 
 def delete_promoteur (request,myid) :
     item = Promoteur.objects.get(id =myid)
     item.delete()
-    messages.info(request,'item delete seccely ')
+    messages.info(request,'Promoteur supprimé')
     return redirect(promoteur)
 
 def delete_stage (request,myid) :
     item = Stage.objects.get(id =myid)
     item.delete()
-    messages.info(request,'item delete seccely ')
+    messages.info(request,'Stage supprimé')
     return redirect(stage)
     
 def update_stagiaire (request,myid) :
@@ -161,7 +162,7 @@ def update_stagiaire (request,myid) :
     form = StagiaireForm(request.POST,instance = itemup)
     if form.is_valid():
         form.save()
-        messages.success(request,"Record Updated Successfully!!")
+        messages.success(request,"Stagiaire modifié")
         return redirect(stagiaire)
 
 
@@ -170,7 +171,7 @@ def update_encadrant (request,myid) :
     form = EncadrantForm(request.POST,instance = itemup)
     if form.is_valid():
         form.save()
-        messages.success(request,"Record Updated Successfully!!")
+        messages.success(request,"Encadrant modifié")
         return redirect(encadrant)
 
 
@@ -179,7 +180,7 @@ def update_promoteur (request,myid) :
     form = PromoteurForm(request.POST,instance = itemup)
     if form.is_valid():
         form.save()
-        messages.success(request,"Record Updated Successfully!!")
+        messages.success(request,"Promoteur modifié")
         return redirect(promoteur)
 
 
@@ -188,7 +189,7 @@ def update_organisme (request,myid) :
     form = OrganismeForm(request.POST,instance = itemup)
     if form.is_valid():
         form.save()
-        messages.success(request,"Record Updated Successfully!!")
+        messages.success(request,"Organisme modifié")
         return redirect(organisme)
 
 def update_stage (request,myid) :
@@ -196,14 +197,14 @@ def update_stage (request,myid) :
     form = StageForm(request.POST,instance = itemup)
     if form.is_valid():
         form.save()
-        messages.success(request,"Record Updated Successfully!!")
+        messages.success(request,"Stage modifié")
         return redirect(stage)
 
 
 def delete_tableform(request,myid) :
     item = Fiche_Stage.objects.get(id =myid)
     item.delete()
-    messages.info(request,'item delete seccely ')
+    messages.info(request,'Fiche supprimée')
     return redirect(tableFormulaireStage)
 
 def load_Etudiant(request):
@@ -244,7 +245,7 @@ def get_Chart (request,year):
     organismes2=[]
     ficheannee=Fiche_Stage.objects.filter(AnneeCourante=year)
     Organismes=ficheannee.values('Organisme').annotate(countorg=Count('Organisme')).order_by()
-    Organismesprt=Organismes.filter(Organisme__typeOr=1)
+    Organismesprt=Organismes.filter(Organisme__typeOr='partenaire')
     annees=[]
     nbOrganismes=[]
     yearss=Fiche_Stage.objects.filter(NivEtude=5)

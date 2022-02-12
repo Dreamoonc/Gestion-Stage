@@ -17,8 +17,8 @@ NIV_ETUDE=(
 (5,"CS3")
 )
 TYPE_ORGANISME=(
-(1,"partenaire"),
-(0,"nonPartenaire")
+("partenaire","partenaire"),
+("nonPartenaire","nonPartenaire")
 )
 
 
@@ -43,7 +43,7 @@ class Encadrant (models.Model):
 
 class Organisme (models.Model):
     NomOrganisme= models.CharField(max_length=40,primary_key=True)
-    typeOr=models.IntegerField(choices=TYPE_ORGANISME)
+    typeOr=models.CharField(choices=TYPE_ORGANISME , max_length=30)
     def __str__(self):
         return self.NomOrganisme 
 
@@ -77,10 +77,10 @@ class Fiche_Stage (models.Model):
     Etudiant=models.ManyToManyField(Stagiaire)
     Organisme=models.ForeignKey("Organisme",on_delete=models.CASCADE)
     Stage=models.ForeignKey("Stage",on_delete=models.CASCADE)
-    Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE)
-    Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE)
+    Encadrant=models.ForeignKey("Encadrant",on_delete=models.CASCADE,null=True,blank=True)
+    Promoteur=models.ForeignKey("Promoteur",on_delete=models.CASCADE,null=True,blank=True)
     AnneeCourante=models.IntegerField(default=datetime.datetime.now().year)
-    Sujet = models.TextField(max_length=60,unique=True,null=True,blank=True)
+    Sujet = models.TextField(max_length=60,null=True,blank=True)
     def __str__(self):
         return self.id
     class Meta:
